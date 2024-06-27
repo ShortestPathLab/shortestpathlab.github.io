@@ -18,8 +18,7 @@ const members = await getCollection("team");
 const works = (await getCollection("works")).filter(c => c.data.featured);
 const publications = await getPublications();
 
-const sortedPosts = getSortedPosts(posts);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const recentPosts = getSortedPosts(posts);
 ---
 
 <Layout>
@@ -60,18 +59,6 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       <SeeAllLink href="/works" primary="See all works" />
     </section>
 
-    <section id="publications">
-      <h2>Publications</h2>
-      <ul>
-        {
-          take(publications, 3).map(c => (
-            <CardPublication pub={c} client:idle />
-          ))
-        }
-      </ul>
-      <SeeAllLink href="/publications" primary="See all publications" />
-    </section>
-
     {
       recentPosts.length > 0 && (
         <section id="recent-posts">
@@ -92,6 +79,18 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         </section>
       )
     }
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <ul>
+        {
+          take(publications, 3).map(c => (
+            <CardPublication pub={c} client:idle />
+          ))
+        }
+      </ul>
+      <SeeAllLink href="/publications" primary="See all publications" />
+    </section>
 
     <section id="team">
       <h2>Team</h2>
