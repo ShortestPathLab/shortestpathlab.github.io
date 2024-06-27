@@ -7,18 +7,14 @@ featured: true
 ---
 
 import Cite from "@components/Cite.astro";
-import TeamItem from "@components/TeamItem.astro";
+import Member from "@components/Member.astro";
 import Grid from "@components/Grid.astro";
-import { getCollection } from "astro:content";
 
 ## Contributors
 
-<Grid class="not-prose my-4">
-  {(await getCollection("team"))
-    .filter(c => !c.data.alumni)
-    .map(c => (
-      <TeamItem member={c.data} />
-    ))}
+<Grid class="not-prose my-4 gap-8">
+  <Member id="dharabor" />
+  <Member id="kzheng" />
 </Grid>
 
 ## Some content here

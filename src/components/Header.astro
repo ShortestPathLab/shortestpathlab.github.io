@@ -155,10 +155,10 @@ const { activeNav } = Astro.props;
     @apply opacity-100;
   }
   #menu-items-wrapper {
-    @apply grid w-full grid-rows-[0fr] justify-stretch transition-[grid-template-rows] duration-500 ease-out sm:grid-rows-[1fr] sm:justify-end;
+    @apply -mb-10 grid w-full grid-rows-[0fr] justify-stretch transition-[grid-template-rows] duration-500 ease-out sm:mb-0 sm:grid-rows-[1fr] sm:justify-end;
   }
   #menu-items-wrapper.open {
-    @apply grid-rows-[1fr] after:mx-2 after:mt-8 after:border-b after:border-current after:content-[''] after:sm:border-0 sm:after:content-none;
+    @apply mb-0 grid-rows-[1fr]  after:mt-8 after:border-b after:border-current after:content-[''] after:sm:border-0 sm:after:content-none;
   }
   #menu-items {
     @apply w-full sm:w-fit;

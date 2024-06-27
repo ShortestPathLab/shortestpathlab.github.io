@@ -11,7 +11,7 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  base: "/shortestpathlab.github.io",
+  base: "./",
   integrations: [
     tailwind({
       applyBaseStyles: false,

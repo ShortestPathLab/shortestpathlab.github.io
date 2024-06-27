@@ -1,7 +1,7 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://spaaaacccee.github.io", // replace this with your deployed domain
+  website: "https://pathfinding.ai/", // replace this with your deployed domain
   author: "Kevin Zheng",
   desc: "ShortestPathLab is a research group at Monash University led by A/Prof Daniel Harabor for AI planning and heuristic search.",
   title: "ShortestPathLab",

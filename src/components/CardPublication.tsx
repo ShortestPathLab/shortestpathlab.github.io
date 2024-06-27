@@ -10,7 +10,7 @@ export function CardPublication({ pub }: { pub?: Publication }) {
         primary={`${pub?.year} / ${pub?.title}`}
         secondary={
           <span
-            className="text-sm font-medium"
+            className="break-all text-sm font-medium sm:break-normal"
             dangerouslySetInnerHTML={{ __html: pub?.formatted ?? "" }}
           />
         }

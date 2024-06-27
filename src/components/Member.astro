@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import TeamItem from "./TeamItem.astro";
+import { head } from "lodash-es";
+
+export interface Props {
+  id: CollectionEntry<"team">["id"];
+}
+
+const { id } = Astro.props;
+const member = head(await getCollection("team", c => c.id === id));
+---
+
+<TeamItem member={member?.data} />

@@ -43,11 +43,13 @@ const layoutProps = {
     <Breadcrumbs />
   </div>
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
-    <p class="post-description">
-      {description}
-    </p>
-    <p class="post-link"><a href={url}>{url}</a></p>
+    <div transition:name={slugifyStr(title)}>
+      <h1 class="post-title">{title}</h1>
+      <p class="post-description">
+        {description}
+      </p>
+      <p class="post-link"><a href={url}>{url}</a></p>
+    </div>
     <Hr noPadding />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
       <Content />
@@ -79,7 +81,7 @@ const layoutProps = {
     @apply mx-auto w-full max-w-5xl px-4 pb-12;
   }
   .post-title {
-    @apply mt-4 text-2xl font-semibold sm:text-4xl;
+    @apply mt-4 text-2xl sm:text-4xl;
   }
   .post-description {
     @apply mt-4 max-w-xl font-medium;
