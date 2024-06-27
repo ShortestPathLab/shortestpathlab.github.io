@@ -1,7 +1,7 @@
 import { SITE } from "@config";
 import type { CollectionEntry } from "astro:content";
 
-export default (post: CollectionEntry<"blog">) => {
+export default (post: CollectionEntry<"blog" | "works">) => {
   return (
     <div
       style={{
@@ -81,7 +81,7 @@ export default (post: CollectionEntry<"blog">) => {
                 "
               </span>
               <span style={{ overflow: "hidden", fontWeight: "bold" }}>
-                {post.data.author}
+                {"author" in post.data ? post.data.author : "Editor team"}
               </span>
             </span>
 

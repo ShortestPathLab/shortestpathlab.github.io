@@ -1,0 +1,15 @@
+---
+import Works from "@layouts/Works.astro";
+import getPagination from "@utils/getPagination";
+import { getCollection } from "astro:content";
+
+const works = await getCollection("works");
+
+const pagination = getPagination({
+  posts: works,
+  page: 1,
+  isIndex: true,
+});
+---
+
+<Works {...pagination} />

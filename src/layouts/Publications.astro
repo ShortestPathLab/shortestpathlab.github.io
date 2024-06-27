@@ -1,0 +1,62 @@
+---
+import { CardPublication } from "@components/CardPublication";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Pagination from "@components/Pagination.astro";
+import { SITE } from "@config";
+import type { Publication } from "@content/getPublications";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import { entries, groupBy, orderBy, startCase } from "lodash-es";
+
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  paginatedPosts: Publication[];
+}
+
+const getHeading = (k: string) =>
+  ({
+    "paper-conference": "Conference Paper",
+    "article-journal": "Journal Article",
+  })[k] || startCase(k);
+
+const { currentPage, totalPages, paginatedPosts } = Astro.props;
+const posts = groupBy(paginatedPosts, "type");
+---
+
+<Layout title={`Publications | ${SITE.title}`}>
+  <Header activeNav="publications" />
+  <Main pageTitle="Publications" pageDesc="All the publications I've posted.">
+    {
+      entries(posts).map(([k, v]) => (
+        <section>
+          <h2>{getHeading(k)}</h2>
+          <ul>
+            {orderBy(v, ["year", "title"], ["desc", "asc"]).map(pub => (
+              <CardPublication pub={pub} client:idle />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </Main>
+
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/publications${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/publications/${currentPage + 1}/`}
+  />
+
+  <Footer noMarginTop={totalPages > 1} />
+</Layout>
+
+<style>
+  section {
+    @apply p-0;
+  }
+  section h2 {
+    @apply my-8 text-2xl;
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+layout: ../layouts/AboutLayout.astro
+title: "About"
+---
+
+import TeamItem from "@components/TeamItem.astro";
+import Grid from "@components/Grid.astro";
+import { getCollection } from "astro:content";
+
+Hello! You've reached the webpages of The Shortest Path Lab (SPL), a research group at Monash University led by A/Prof Daniel Harabor. Unfortunately this webpage isn't finished yet. Please excuse the mess!
+
+A main focus of the lab is the development of algorithms for single- and multi-agent pathfinding. We study these problems using the tools of AI Planning and Heuristic Search and we consider their application in a variety of real-world settings. Some examples of applications which typically motivate our work: pathfinding in video games, routing and trip planning in transportation networks, motion planning and navigation for mobile robots and automated warehouse logistics.
+
+Since you're here, you might like to know more about what we do.
+
+For an overview of the lab, and copies of research papers, please visit Daniel's homepage
+
+- Visit our YouTube channel for recordings of technical talks
+- Our benchmark repository, collects many challenging problem sets for a variety of domains:
+  - Grid maps and Voxel worlds
+  - Navigation meshes
+  - Polygonal obstacles
+  - Transportation networks
+- Check out the MAPF Tracker, an interactive database with best-known results on the problem of Multi-Agent Path Finding.
+- Explore Warthog, a library we developed which contains many implementations of popular algorithms, such as Polyanya and Jump Point Search
+- Discover Posthoc, an interactive visualiser that helps people understand how pathfinding algorithms actually work.
+- Did you know we organise research events and competitions? It's true! Some recent examples:
+- GPPC^2 challenges practitioners to develop fast and efficient algorithms for computing single agent paths on 2D grids. Solving these types of problems well is important for many kinds of applications, but especially computer games.
+- The League of Robot Runners challenges practitioners with coordinating teams of up to thousands of moving robots. Solving these types of problems well is again important for many kinds of applications, such as automated warehouses.
+
+## Members
+
+### Current
+
+<Grid class="not-prose my-4">
+  {(await getCollection("team"))
+    .filter(c => !c.data.alumni)
+    .map(c => (
+      <TeamItem member={c.data} />
+    ))}
+</Grid>
+
+### Alumni
+
+<Grid class="not-prose my-4">
+  {(await getCollection("team"))
+    .filter(c => c.data.alumni)
+    .map(c => (
+      <TeamItem member={c.data} />
+    ))}
+</Grid>

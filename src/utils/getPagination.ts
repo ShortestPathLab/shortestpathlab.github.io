@@ -5,14 +5,16 @@ interface GetPaginationProps<T> {
   posts: T;
   page: string | number;
   isIndex?: boolean;
+  postPerPage?: number;
 }
 
 const getPagination = <T>({
   posts,
   page,
   isIndex = false,
+  postPerPage = SITE.postPerPage,
 }: GetPaginationProps<T[]>) => {
-  const totalPagesArray = getPageNumbers(posts.length);
+  const totalPagesArray = getPageNumbers(posts.length, postPerPage);
   const totalPages = totalPagesArray.length;
 
   const currentPage = isIndex
@@ -21,8 +23,8 @@ const getPagination = <T>({
       ? Number(page)
       : 0;
 
-  const lastPost = isIndex ? SITE.postPerPage : currentPage * SITE.postPerPage;
-  const startPost = isIndex ? 0 : lastPost - SITE.postPerPage;
+  const lastPost = isIndex ? postPerPage : currentPage * postPerPage;
+  const startPost = isIndex ? 0 : lastPost - postPerPage;
   const paginatedPosts = posts.slice(startPost, lastPost);
 
   return {

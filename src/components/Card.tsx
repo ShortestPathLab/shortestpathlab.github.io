@@ -1,6 +1,7 @@
 import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
+import type { ReactNode } from "react";
 
 export interface Props {
   href?: string;
@@ -8,28 +9,54 @@ export interface Props {
   secHeading?: boolean;
 }
 
+export function CardBase({
+  primary,
+  secondary,
+  description,
+  secHeading,
+  href,
+  slug,
+}: {
+  primary?: string;
+  secondary?: ReactNode;
+  description?: ReactNode;
+  href?: string;
+  secHeading?: boolean;
+  slug?: string;
+}) {
+  const headerProps = {
+    style: { viewTransitionName: slugifyStr(slug ?? primary ?? "") },
+    className: href ? `decoration-dashed hover:underline` : "",
+  };
+  return (
+    <li className="my-6 list-none">
+      <a
+        href={href}
+        className={`mb-2 inline-block text-lg font-medium ${href ? "decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0" : ""}`}
+      >
+        {true ? (
+          <h2 {...headerProps}>{primary}</h2>
+        ) : (
+          <h3 {...headerProps}>{primary}</h3>
+        )}
+      </a>
+      {secondary}
+      <div>{description}</div>
+    </li>
+  );
+}
 export default function Card({ href, frontmatter, secHeading = true }: Props) {
   const { title, pubDatetime, modDatetime, description } = frontmatter;
 
-  const headerProps = {
-    style: { viewTransitionName: slugifyStr(title) },
-    className: "text-lg font-medium decoration-dashed hover:underline",
-  };
-
   return (
-    <li className="my-6">
-      <a
-        href={href}
-        className="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
-      >
-        {secHeading ? (
-          <h2 {...headerProps}>{title}</h2>
-        ) : (
-          <h3 {...headerProps}>{title}</h3>
-        )}
-      </a>
-      <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
-      <p>{description}</p>
-    </li>
+    <CardBase
+      href={href}
+      secHeading={secHeading}
+      primary={title}
+      description={<p className="mt-2">{description}</p>}
+      secondary={
+        <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
+      }
+    />
   );
 }

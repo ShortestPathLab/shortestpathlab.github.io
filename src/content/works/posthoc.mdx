@@ -1,0 +1,38 @@
+---
+title: Posthoc
+description: Create simple and effective visualisations from logs to help you understand search.
+url: https://posthoc.pathfinding.ai
+image: https://posthoc.pathfinding.ai/img/gallery/mcp.png
+featured: true
+---
+
+import Cite from "@components/Cite.astro";
+import TeamItem from "@components/TeamItem.astro";
+import Grid from "@components/Grid.astro";
+import { getCollection } from "astro:content";
+
+## Contributors
+
+<Grid class="not-prose my-4">
+  {(await getCollection("team"))
+    .filter(c => !c.data.alumni)
+    .map(c => (
+      <TeamItem member={c.data} />
+    ))}
+</Grid>
+
+## Some content here
+
+Lorem ipsum dolor sit amet <Cite source="antsfeld12" />, consectetur adipiscing elit.
+Donec est mi, facilisis ac massa quis, pellentesque imperdiet augue. Nulla porta
+lorem ac arcu interdum pellentesque. Suspendisse scelerisque tempus est, eu
+iaculis magna tincidunt eget. Praesent tortor tortor, hendrerit non ornare in,
+hendrerit in elit. Mauris eros elit, rutrum vitae vulputate quis, tempus sit
+amet eros. Aenean posuere et dolor id tempus. Donec eget turpis libero. Cras
+sagittis, ante ut semper sagittis, orci nibh tristique augue, vel placerat ante
+lorem sit amet sem. Pellentesque et magna nec felis finibus lacinia. In est
+felis, fermentum eget gravida a, pretium ut ante.
+
+## References
+
+<Cite source="antsfeld12" variant="block" />

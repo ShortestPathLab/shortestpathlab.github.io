@@ -1,98 +1,81 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
-import Socials from "@components/Socials.astro";
+import { CardPublication } from "@components/CardPublication";
+import Footer from "@components/Footer.astro";
+import Grid from "@components/Grid.astro";
+import Header from "@components/Header.astro";
+import SeeAllLink from "@components/SeeAllLink.astro";
+import TeamItem from "@components/TeamItem.astro";
+import WorkCard from "@components/WorkCard.astro";
+import Layout from "@layouts/Layout.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
+import { getCollection } from "astro:content";
+import { take } from "lodash-es";
+import { getPublications } from "../content/getPublications";
 
 const posts = await getCollection("blog");
+const members = await getCollection("team");
+const works = (await getCollection("works")).filter(c => c.data.featured);
+const publications = await getPublications();
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-
-const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Mingalaba</h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="rss-link"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
-          ><path
-            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
-          ></path><path
-            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
-          ></path><circle cx="6" cy="18" r="2"></circle>
-        </svg>
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
+      <p id="overline">ShortestPathLab @ Monash University</p>
+      <h1>We study planning and heuristic search</h1>
+      <p id="tagline">
+        ShortestPathLab is a research group at Monash University led by A/Prof
+        Daniel Harabor for AI planning and heuristic search.
       </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
     </section>
 
-    <Hr />
+    <section id="featured">
+      <h2>
+        Featured works
+        <div id="featured-gallery-controls">
+          <button class="material-symbols-outlined left"
+            >chevron_backward</button
+          >
+          <button class="material-symbols-outlined right"
+            >chevron_forward</button
+          >
+        </div>
+      </h2>
+      <div>
+        <ul class="flex flex-row gap-2">
+          {
+            works.map(work => (
+              <div class="min-w-80">
+                <WorkCard work={work} />
+              </div>
+            ))
+          }
+        </ul>
+      </div>
+      <SeeAllLink href="/works" primary="See all works" />
+    </section>
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
+    <section id="publications">
+      <h2>Publications</h2>
+      <ul>
+        {
+          take(publications, 3).map(c => (
+            <CardPublication pub={c} client:idle />
+          ))
+        }
+      </ul>
+      <SeeAllLink href="/publications" primary="See all publications" />
+    </section>
 
     {
       recentPosts.length > 0 && (
         <section id="recent-posts">
-          <h2>Recent Posts</h2>
+          <h2>Posts</h2>
           <ul>
             {recentPosts.map(
               ({ data, slug }, index) =>
@@ -105,20 +88,18 @@ const socialCount = SOCIALS.filter(social => social.active).length;
                 )
             )}
           </ul>
+          <SeeAllLink primary="See all posts" href="/posts/" />
         </section>
       )
     }
 
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div>
+    <section id="team">
+      <h2>Team</h2>
+      <Grid width={280} class="my-8 justify-between gap-12">
+        {members.map(c => <TeamItem member={c.data} />)}
+      </Grid>
+      <SeeAllLink primary="About ShortestPathLab" href="/about/" />
+    </section>
   </main>
 
   <Footer />
@@ -127,10 +108,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 <style>
   /* ===== Hero Section ===== */
   #hero {
-    @apply pb-6 pt-8;
+    @apply pb-24 pt-32;
   }
   #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+    @apply my-2 inline-block text-2xl font-medium sm:my-2 sm:text-4xl;
   }
   #hero .rss-link {
     @apply mb-6;
@@ -138,8 +119,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   #hero .rss-icon {
     @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
   }
-  #hero p {
-    @apply my-2;
+  #hero #overline {
+    @apply max-w-xl text-sm font-medium opacity-70;
+  }
+  #hero #tagline {
+    @apply my-12 max-w-xl font-medium;
   }
   .social-wrapper {
     @apply mt-4 flex flex-col sm:flex-row sm:items-center;
@@ -150,14 +134,68 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
   /* ===== Featured & Recent Posts Sections ===== */
   #featured,
-  #recent-posts {
+  #recent-posts,
+  #publications,
+  #team {
     @apply pb-6 pt-12;
   }
   #featured h2,
-  #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+  #publications h2,
+  #recent-posts h2,
+  #team h2 {
+    @apply text-2xl font-medium;
+  }
+
+  #featured {
+  }
+  #featured > div {
+    @apply mt-8 snap-x snap-mandatory overflow-x-scroll;
+    width: calc(var(--vw, 1vw) * 100);
+    margin-left: calc(50% - calc(var(--vw, 1vw) * 50));
+    scroll-padding: calc(
+      calc(calc(calc(var(--vw, 1vw) * 100) - min(64rem, 100%)) / 2) + 1rem
+    );
+  }
+  #featured > div::-webkit-scrollbar {
+    height: 0px;
+  }
+  #featured > div > ul {
+    @apply w-fit;
+    padding: 0 calc(64rem + 1rem);
+  }
+
+  #featured > div > ul > * {
+    @apply snap-start;
+  }
+  #featured > h2 {
+    @apply flex flex-row justify-between;
+  }
+  #featured-gallery-controls {
+    @apply translate-y-1;
   }
   .all-posts-btn-wrapper {
     @apply my-8 text-center;
   }
 </style>
+<script data-astro-rerun>
+  document.addEventListener("astro:page-load", () => {
+    const box = document.querySelector("#featured > div");
+    const elements = document.querySelectorAll("#featured > div > ul > *");
+    box.addEventListener("scroll", () => {
+      for (const elem of elements) {
+        const a = elem.getBoundingClientRect();
+        elem.style.setProperty("--in", `${1 - a.left ** 2}`);
+      }
+    });
+    document
+      .querySelector("#featured-gallery-controls > .left")
+      .addEventListener("click", () => {
+        box.scrollBy({ left: -320, behavior: "smooth" });
+      });
+    document
+      .querySelector("#featured-gallery-controls > .right")
+      .addEventListener("click", () => {
+        box.scrollBy({ left: 320, behavior: "smooth" });
+      });
+  });
+</script>

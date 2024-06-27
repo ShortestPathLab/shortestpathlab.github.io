@@ -5,16 +5,16 @@
 @layer base {
   :root,
   html[data-theme="light"] {
-    --color-fill: 251, 254, 251;
-    --color-text-base: 40, 39, 40;
-    --color-accent: 0, 108, 172;
+    --color-fill: 255, 255, 255;
+    --color-text-base: 8, 8, 8;
+    --color-accent: 33, 40, 210;
     --color-card: 230, 230, 230;
     --color-card-muted: 205, 205, 205;
     --color-border: 236, 233, 233;
   }
   html[data-theme="dark"] {
-    --color-fill: 33, 39, 55;
-    --color-text-base: 234, 237, 243;
+    --color-fill: 10, 10, 10;
+    --color-text-base: 249, 249, 249;
     --color-accent: 255, 107, 1;
     --color-card: 52, 63, 96;
     --color-card-muted: 138, 51, 2;
@@ -29,12 +29,11 @@
     display: block;
   }
   body {
-    @apply flex min-h-[100svh] flex-col bg-skin-fill font-mono text-skin-base 
-    selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
+    @apply flex min-h-[100svh] flex-col bg-skin-fill font-mono font-medium 
+    text-skin-base selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
   }
-  section,
-  footer {
-    @apply mx-auto max-w-3xl px-4;
+  section {
+    @apply mx-auto max-w-5xl px-4;
   }
   a {
     @apply outline-2 outline-offset-1 outline-skin-fill 
@@ -49,8 +48,8 @@
     sm:scale-110;
   }
   .prose {
-    @apply prose-headings:!mb-3 prose-headings:!text-skin-base 
-    prose-h3:italic prose-p:!text-skin-base 
+    @apply prose-headings:!mb-3 prose-headings:!font-medium prose-headings:!text-skin-base
+    prose-p:!text-skin-base 
     prose-a:!text-skin-base prose-a:!decoration-dashed prose-a:underline-offset-8
     hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
     prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
@@ -72,6 +71,9 @@
   .prose a {
     @apply break-words hover:!text-skin-accent;
   }
+  .prose p {
+    @apply font-[450];
+  }
   .prose thead th:first-child,
   tbody td:first-child,
   tfoot td:first-child {
@@ -88,6 +90,9 @@
   }
   .prose h2#table-of-contents + p {
     @apply hidden;
+  }
+  .not-prose {
+    @apply text-skin-base;
   }
 
   /* ===== scrollbar ===== */
@@ -107,7 +112,8 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-skin-card;
+    @apply rounded-full bg-skin-card-muted;
+    box-shadow: inset 0px 0px 0px 4px rgb(var(--color-fill));
   }
 
   /* Handle on hover */

@@ -1,0 +1,19 @@
+---
+type Props = {
+  width?: number;
+} & any;
+
+const { width = 280, ...props } = Astro.props;
+---
+
+<div
+  {...props}
+  style=`grid-template-columns: repeat(auto-fill, minmax(min(100%, ${width}px), 1fr))`
+>
+  <slot />
+</div>
+<style>
+  div {
+    @apply grid grid-flow-row-dense;
+  }
+</style>

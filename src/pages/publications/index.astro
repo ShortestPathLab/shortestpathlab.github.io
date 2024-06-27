@@ -1,0 +1,15 @@
+---
+import { getPublications } from "@content/getPublications";
+import Publications from "@layouts/Publications.astro";
+import getPagination from "@utils/getPagination";
+
+const publications = await getPublications();
+
+const pagination = getPagination({
+  posts: publications,
+  page: 1,
+  isIndex: true,
+});
+---
+
+<Publications {...pagination} />

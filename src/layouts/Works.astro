@@ -1,0 +1,41 @@
+---
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Pagination from "@components/Pagination.astro";
+import WorkCard from "@components/WorkCard.astro";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  paginatedPosts: CollectionEntry<"works">[];
+}
+
+const { currentPage, totalPages, paginatedPosts } = Astro.props;
+---
+
+<Layout title={`Works | ${SITE.title}`}>
+  <Header activeNav="works" />
+  <Main pageTitle="Works" pageDesc="All the works I've posted.">
+    <ul class="grid-flow-row-sparse collection my-8 grid gap-2">
+      {paginatedPosts.map(work => <WorkCard work={work} />)}
+    </ul>
+  </Main>
+
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/works${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/works/${currentPage + 1}/`}
+  />
+
+  <Footer noMarginTop={totalPages > 1} />
+</Layout>
+<style>
+  .collection {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  }
+</style>

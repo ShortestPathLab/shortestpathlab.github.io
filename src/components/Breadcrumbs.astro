@@ -1,4 +1,6 @@
 ---
+import { startCase } from "lodash-es";
+
 // Remove current url path and remove trailing slash if exists
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 
@@ -8,44 +10,43 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
-breadcrumbList[0] === "posts" &&
-  breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
+// breadcrumbList[0] === "posts" &&
+//   breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
 
 // if breadcrumb is Home > Tags > [tag] > [page] <etc>
 // replace [tag] > [page] with [tag] (page number)
-breadcrumbList[0] === "tags" &&
-  !isNaN(Number(breadcrumbList[2])) &&
-  breadcrumbList.splice(
-    1,
-    3,
-    `${breadcrumbList[1]} ${
-      Number(breadcrumbList[2]) === 1 ? "" : "(page " + breadcrumbList[2] + ")"
-    }`
-  );
+// breadcrumbList[0] === "tags" &&
+//   !isNaN(Number(breadcrumbList[2])) &&
+//   breadcrumbList.splice(
+//     1,
+//     3,
+//     `${breadcrumbList[1]} ${
+//       Number(breadcrumbList[2]) === 1 ? "" : "(page " + breadcrumbList[2] + ")"
+//     }`
+//   );
 ---
 
 <nav class="breadcrumb" aria-label="breadcrumb">
   <ul>
     <li>
       <a href="/">Home</a>
-      <span aria-hidden="true">&raquo;</span>
+      <span aria-hidden="true" class="inline-block px-1 opacity-70">{"/"}</span>
     </li>
     {
       breadcrumbList.map((breadcrumb, index) =>
         index + 1 === breadcrumbList.length ? (
           <li>
-            <span
-              class={`${index > 0 ? "lowercase" : "capitalize"}`}
-              aria-current="page"
-            >
+            <span class={`capitalize opacity-50`} aria-current="page">
               {/* make the last part lowercase in Home > Tags > some-tag */}
-              {decodeURIComponent(breadcrumb)}
+              {startCase(decodeURIComponent(breadcrumb))}
             </span>
           </li>
         ) : (
           <li>
             <a href={`/${breadcrumb}/`}>{breadcrumb}</a>
-            <span aria-hidden="true">&raquo;</span>
+            <span aria-hidden="true" class="inline-block px-1 opacity-50">
+              {"/"}
+            </span>
           </li>
         )
       )
@@ -55,16 +56,15 @@ breadcrumbList[0] === "tags" &&
 
 <style>
   .breadcrumb {
-    @apply mx-auto mb-1 mt-8 w-full max-w-3xl px-4;
+    @apply mx-auto mb-4 mt-8 w-full max-w-5xl px-4 font-medium;
   }
   .breadcrumb ul li {
     @apply inline;
   }
   .breadcrumb ul li a {
-    @apply capitalize opacity-70;
+    @apply capitalize;
   }
   .breadcrumb ul li span {
-    @apply opacity-70;
   }
   .breadcrumb ul li:not(:last-child) a {
     @apply hover:opacity-100;
