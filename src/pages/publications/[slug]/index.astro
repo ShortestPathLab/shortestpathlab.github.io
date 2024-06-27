@@ -3,7 +3,6 @@ import { getPublications } from "@content/getPublications";
 import Publications from "@layouts/Publications.astro";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
-import { kebabCase } from "lodash-es";
 
 export interface Props {}
 
@@ -11,16 +10,11 @@ const posts = await getPublications();
 
 export async function getStaticPaths() {
   const posts = await getPublications();
-  const postResult = posts.map(post => ({
-    params: { slug: kebabCase(post.title) },
-    props: { post },
-  }));
-
   const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
     params: { slug: String(pageNum) },
   }));
 
-  return [...postResult, ...pagePaths];
+  return [...pagePaths];
 }
 
 const { slug } = Astro.params;
