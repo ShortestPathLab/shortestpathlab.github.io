@@ -3,7 +3,7 @@ import Works from "@layouts/Works.astro";
 import getPagination from "@utils/getPagination";
 import { getCollection } from "astro:content";
 
-const works = await getCollection("works");
+const works = await getCollection("projects");
 
 const pagination = getPagination({
   posts: works,

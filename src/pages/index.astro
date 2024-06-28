@@ -15,7 +15,7 @@ import { getPublications } from "../content/getPublications";
 
 const posts = await getCollection("blog");
 const members = await getCollection("team");
-const works = (await getCollection("works")).filter(c => c.data.featured);
+const works = (await getCollection("projects")).filter(c => c.data.featured);
 const publications = await getPublications();
 
 const recentPosts = getSortedPosts(posts);
@@ -35,7 +35,7 @@ const recentPosts = getSortedPosts(posts);
 
     <section id="featured">
       <h2>
-        Featured works
+        Featured projects
         <div id="featured-gallery-controls">
           <button class="material-symbols-outlined left"
             >chevron_backward</button
@@ -56,7 +56,7 @@ const recentPosts = getSortedPosts(posts);
           }
         </ul>
       </div>
-      <SeeAllLink href="/works" primary="See all works" />
+      <SeeAllLink href="/projects" primary="See all projects" />
     </section>
 
     {
@@ -151,7 +151,10 @@ const recentPosts = getSortedPosts(posts);
     @apply mt-8 snap-x snap-mandatory overflow-x-scroll;
     width: calc(var(--vw, 1vw) * 100);
     margin-left: calc(50% - calc(var(--vw, 1vw) * 50));
-    scroll-padding: calc(
+    scroll-padding-left: calc(
+      calc(calc(calc(var(--vw, 1vw) * 100) - min(64rem, 100%)) / 2) + 1rem
+    );
+    padding-right: calc(
       calc(calc(calc(var(--vw, 1vw) * 100) - min(64rem, 100%)) / 2) + 1rem
     );
   }

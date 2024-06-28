@@ -3,11 +3,11 @@ import WorkDetails from "@layouts/WorkDetails.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export interface Props {
-  work: CollectionEntry<"works">;
+  work: CollectionEntry<"projects">;
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("works");
+  const posts = await getCollection("projects");
 
   const postResult = posts.map(work => ({
     params: { slug: work.slug },

@@ -4,7 +4,7 @@ import { generateOgImageForPost } from "@utils/generateOgImages";
 import { slugifyStr } from "@utils/slugify";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("works").then(p =>
+  const posts = await getCollection("projects").then(p =>
     p.filter(({ data }) => !data.ogImage)
   );
 
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 export const GET: APIRoute = async ({ props }) =>
   new Response(
-    await generateOgImageForPost(props as CollectionEntry<"works">),
+    await generateOgImageForPost(props as CollectionEntry<"projects">),
     {
       headers: { "Content-Type": "image/png" },
     }

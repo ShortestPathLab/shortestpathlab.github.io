@@ -2,12 +2,12 @@
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-  work?: CollectionEntry<"works">;
+  work?: CollectionEntry<"projects">;
 }
 const { work } = Astro.props;
 ---
 
-<a href=`/works/${work?.slug}` transition:name={work?.slug}>
+<a href=`/projects/${work?.slug}` transition:name={work?.slug}>
   <li
     class=`flex flex-col gap-2 h-96 min-w-64 rounded-md bg-black p-6 bg-cover bg-center`
     style=`background-image: linear-gradient(to bottom, rgba(0 0 0 / 50%), rgba(0 0 0 / 20%), rgba(0 0 0 / 0%)), url('${work?.data?.image}')`

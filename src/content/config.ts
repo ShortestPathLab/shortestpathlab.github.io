@@ -23,7 +23,7 @@ const blog = defineCollection({
     }),
 });
 
-const works = defineCollection({
+const projects = defineCollection({
   type: "content",
   schema: ({ image }) =>
     z.object({
@@ -52,4 +52,4 @@ const team = defineCollection({
     }),
 });
 
-export const collections = { blog, works, team };
+export const collections = { blog, projects, team };

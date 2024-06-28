@@ -11,15 +11,15 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   currentPage: number;
   totalPages: number;
-  paginatedPosts: CollectionEntry<"works">[];
+  paginatedPosts: CollectionEntry<"projects">[];
 }
 
 const { currentPage, totalPages, paginatedPosts } = Astro.props;
 ---
 
-<Layout title={`Works | ${SITE.title}`}>
-  <Header activeNav="works" />
-  <Main pageTitle="Works" pageDesc="All the works I've posted.">
+<Layout title={`Projects | ${SITE.title}`}>
+  <Header activeNav="projects" />
+  <Main pageTitle="Projects" pageDesc="All projects at ShortestPathLab.">
     <ul class="grid-flow-row-sparse collection my-8 grid gap-2">
       {paginatedPosts.map(work => <WorkCard work={work} />)}
     </ul>
@@ -28,8 +28,8 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
   <Pagination
     {currentPage}
     {totalPages}
-    prevUrl={`/works${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`/works/${currentPage + 1}/`}
+    prevUrl={`/projects${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/projects/${currentPage + 1}/`}
   />
 
   <Footer noMarginTop={totalPages > 1} />

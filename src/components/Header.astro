@@ -2,7 +2,13 @@
 import { LOGO_IMAGE, SITE } from "@config";
 
 export interface Props {
-  activeNav?: "posts" | "tags" | "about" | "publications" | "search" | "works";
+  activeNav?:
+    | "posts"
+    | "tags"
+    | "about"
+    | "publications"
+    | "search"
+    | "projects";
 }
 
 const { activeNav } = Astro.props;
@@ -38,8 +44,11 @@ const { activeNav } = Astro.props;
         <div id="menu-items-wrapper">
           <ul id="menu-items" class="overflow-hidden sm:flex">
             <li>
-              <a href="/works/" class={activeNav === "works" ? "active" : ""}>
-                Works
+              <a
+                href="/projects/"
+                class={activeNav === "projects" ? "active" : ""}
+              >
+                Projects
               </a>
             </li>
             <li>
