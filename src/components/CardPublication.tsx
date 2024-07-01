@@ -30,9 +30,9 @@ export function CardPublication({ pub }: { pub?: Publication }) {
             </button>
             <a
               className={
-                pub?.doi ? "text-skin-accent" : "pointer-events-none opacity-50"
+                pub?.url ? "text-skin-accent" : "pointer-events-none opacity-50"
               }
-              href={`https://doi.org/${pub?.doi}`}
+              href={pub?.url}
             >
               Publisher
             </a>

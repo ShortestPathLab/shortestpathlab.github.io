@@ -1,8 +1,10 @@
 import { chain, entries, once, parseInt, values } from "lodash-es";
 ///@ts-ignore
-import { Cite } from "@citation-js/core";
+import { Cite, plugins } from "@citation-js/core";
 import "@citation-js/plugin-bibtex";
 import "@citation-js/plugin-csl";
+
+plugins.config.get("@bibtex").constants.fieldTypes.pdf = ["field", "literal"];
 
 export type Publication = {
   id: string;
@@ -13,7 +15,7 @@ export type Publication = {
   month?: number;
   date?: number;
   publisher?: string;
-  doi?: string;
+  url?: string;
   formatted?: string;
   bibtex?: string;
   pdf?: string;
@@ -32,8 +34,8 @@ export const getPublications = once(async () => {
   return chain(strings)
     .map(content => new Cite(content))
     .flatMap(c => c.data)
-    .map((c): Publication => {
-      return {
+    .map(
+      (c): Publication => ({
         citation: new Cite(c).format("citation"),
         id: c.id,
         type: c.type,
@@ -43,14 +45,14 @@ export const getPublications = once(async () => {
           template: "apa",
           lang: "en-us",
         }),
-        doi: c.DOI,
+        url: c.DOI ? `https://doi.org/${c.DOI}` : c.URL,
         pdf: c.pdf,
         title: c.title,
         year: c.issued["date-parts"][0][YEAR] || 0,
         month: c.issued["date-parts"][0][MONTH] || 0,
         date: c.issued["date-parts"][0][DATE] || 0,
-      };
-    })
+      })
+    )
     .orderBy(["year", "title", "type"], ["desc", "asc", "asc"])
     .value();
 });

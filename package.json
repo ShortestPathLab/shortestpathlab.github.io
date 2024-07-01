@@ -20,7 +20,7 @@
     "@astrojs/mdx": "^3.1.2",
     "@astrojs/rss": "^4.0.2",
     "@citation-js/core": "^0.7.14",
-    "@citation-js/plugin-bibtex": "^0.7.14",
+    "@citation-js/plugin-bibtex": "https://gitpkg.vercel.app/ShortestPathLab/citation-js/packages/plugin-bibtex?main",
     "@citation-js/plugin-csl": "^0.7.14",
     "@resvg/resvg-js": "^2.6.0",
     "@types/downloadjs": "^1.4.6",
