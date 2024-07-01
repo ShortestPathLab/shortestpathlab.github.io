@@ -4,7 +4,7 @@
 
 ## Install
 
-Requires `npm` v10.8.1 and `NodeJS` v20.8.0. [Nodejs install guide](https://nodejs.org/en/download/package-manager)
+Requires `npm` v10.8.1 and `NodeJS` v20.8.0. [NodeJS install guide](https://nodejs.org/en/download/package-manager)
 
 In the terminal, run:
 
