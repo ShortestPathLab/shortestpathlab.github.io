@@ -145,11 +145,7 @@ const layoutProps = {
   /** Attaches links to headings in the document,
    *  allowing sharing of sections easily */
   function addHeadingLinks() {
-    let headings = Array.from(
-      document.querySelectorAll(
-        "article h2, article h3, article h4, article h5, article h6"
-      )
-    );
+    let headings = Array.from(document.querySelectorAll("article h2"));
     for (let heading of headings) {
       heading.classList.add("group");
       let link = document.createElement("a");
