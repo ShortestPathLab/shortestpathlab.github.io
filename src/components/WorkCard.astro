@@ -10,7 +10,7 @@ const { work } = Astro.props;
 <a href=`/projects/${work?.slug}` transition:name={work?.slug}>
   <li
     class=`flex flex-col gap-2 h-96 min-w-64 rounded-md bg-black p-6 bg-cover bg-center`
-    style=`background-image: linear-gradient(to bottom, rgba(0 0 0 / 50%), rgba(0 0 0 / 20%), rgba(0 0 0 / 0%)), url('${work?.data?.image}')`
+    style=`background-image: linear-gradient(to bottom, rgba(0 0 0 / 60%), rgba(0 0 0 / 40%), rgba(0 0 0 / 0%)), url('${work?.data?.image}')`
   >
     <h3 class="text-lg text-white">
       {work?.data?.title}
