@@ -8,6 +8,7 @@ featured: true
 
 import Cite from "@components/Cite.astro";
 import Member from "@components/Member.astro";
+import MemberCard from "@components/MemberCard.astro";
 import Grid from "@components/Grid.astro";
 
 ## Contributors
@@ -15,6 +16,13 @@ import Grid from "@components/Grid.astro";
 <Grid class="not-prose my-4 gap-8">
   <Member id="dharabor" />
   <Member id="kzheng" />
+  <MemberCard
+    member={{
+      title: "Yue Zhang",
+      description: "Researcher",
+      image: "https://avatars.githubusercontent.com/u/104757294?v=4",
+    }}
+  />
 </Grid>
 
 ## Some content here
