@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import TeamItem from "./MemberCard.astro";
+import MemberCard from "./MemberCard.astro";
 import { head } from "lodash-es";
 
 export interface Props {
@@ -12,4 +12,4 @@ const { id } = Astro.props;
 const member = head(await getCollection("team", c => c.id === id));
 ---
 
-<TeamItem member={member?.data} />
+<MemberCard member={member?.data} />

@@ -5,7 +5,7 @@ import Footer from "@components/Footer.astro";
 import Grid from "@components/Grid.astro";
 import Header from "@components/Header.astro";
 import SeeAllLink from "@components/SeeAllLink.astro";
-import TeamItem from "@components/MemberCard.astro";
+import MemberCard from "@components/MemberCard.astro";
 import WorkCard from "@components/WorkCard.astro";
 import Layout from "@layouts/Layout.astro";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -95,7 +95,7 @@ const recentPosts = getSortedPosts(posts);
     <section id="team">
       <h2>Team</h2>
       <Grid width={280} class="my-8 justify-between gap-12">
-        {members.map(c => <TeamItem member={c.data} />)}
+        {members.map(c => <MemberCard member={c.data} />)}
       </Grid>
       <SeeAllLink primary="About the lab" href="/about/" />
     </section>

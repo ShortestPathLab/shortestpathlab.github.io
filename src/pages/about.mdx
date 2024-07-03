@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-import TeamItem from "@components/TeamItem.astro";
+import MemberCard from "@components/MemberCard.astro";
 import Grid from "@components/Grid.astro";
 import { getCollection } from "astro:content";
 
@@ -36,7 +36,7 @@ For an overview of the lab, and copies of research papers, please visit Daniel's
   {(await getCollection("team"))
     .filter(c => !c.data.alumni)
     .map(c => (
-      <TeamItem member={c.data} />
+      <MemberCard member={c.data} />
     ))}
 </Grid>
 
@@ -46,6 +46,6 @@ For an overview of the lab, and copies of research papers, please visit Daniel's
   {(await getCollection("team"))
     .filter(c => c.data.alumni)
     .map(c => (
-      <TeamItem member={c.data} />
+      <MemberCard member={c.data} />
     ))}
 </Grid>
