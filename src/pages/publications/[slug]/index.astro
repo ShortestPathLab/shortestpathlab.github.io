@@ -13,8 +13,7 @@ export async function getStaticPaths() {
   const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
     params: { slug: String(pageNum) },
   }));
-
-  return [...pagePaths];
+  return pagePaths;
 }
 
 const { slug } = Astro.params;

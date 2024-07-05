@@ -5,17 +5,18 @@ export interface Props {
   work?: CollectionEntry<"projects">;
 }
 const { work } = Astro.props;
+const dark = work?.data?.dark;
 ---
 
 <a href=`/projects/${work?.slug}` transition:name={work?.slug}>
   <li
-    class=`flex flex-col gap-2 h-96 min-w-64 rounded-md bg-black p-6 bg-cover bg-center`
-    style=`background-image: linear-gradient(to bottom, rgba(0 0 0 / 60%), rgba(0 0 0 / 40%), rgba(0 0 0 / 0%)), url('${work?.data?.image}')`
+    class=`flex flex-col gap-2 h-96 min-w-64 rounded-md bg-blend-multiply p-6 bg-cover bg-center`
+    style=`background-image: linear-gradient(to bottom, rgba(${dark ? "0 0 0" : "225 225 225"} / 60%), rgba(${dark ? "0 0 0" : "225 225 225"} / 20%), rgba(${dark ? "0 0 0" : "225 225 225"} / 10%)), url('${work?.data?.image??'/assets/white.png'}')`
   >
-    <h3 class="text-lg text-white">
+    <h3 class=`text-lg ${dark ? "text-white" : "text-black"}`>
       {work?.data?.title}
     </h3>
-    <p class="text-sm text-white">
+    <p class=`text-sm ${dark ? "text-white" : "text-black"}`>
       {work?.data?.description}
     </p>
   </li>

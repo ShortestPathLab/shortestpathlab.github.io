@@ -37,7 +37,7 @@
   }
   a {
     @apply outline-2 outline-offset-1 outline-skin-fill 
-    focus-visible:no-underline focus-visible:outline-dashed;
+    focus-visible:no-underline focus-visible:outline;
   }
   svg {
     @apply inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent;
@@ -50,7 +50,7 @@
   .prose {
     @apply prose-headings:!mb-3 prose-headings:!font-medium prose-headings:!text-skin-base
     prose-p:!text-skin-base 
-    prose-a:!text-skin-base prose-a:underline-offset-8
+    prose-a:!text-skin-base prose-a:underline-offset-4
     hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
     prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
     prose-figcaption:!text-skin-base prose-figcaption:opacity-70
@@ -61,12 +61,12 @@
     prose-code:bg-opacity-75 prose-code:p-1 
     prose-code:before:!content-none prose-code:after:!content-none
     prose-ol:!text-skin-base 
-    prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-accent
+    prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-base
     prose-table:text-skin-base prose-th:border
     prose-th:border-skin-line prose-td:border 
     prose-td:border-skin-line prose-img:!my-2 
-    prose-img:mx-auto prose-img:border-2 
-    prose-img:border-skin-line prose-hr:!border-skin-line;
+    prose-img:mx-auto
+    prose-img:rounded-md prose-hr:!border-skin-line;
   }
   .prose a {
     @apply break-words hover:!text-skin-accent;
@@ -136,6 +136,6 @@
     @apply hidden;
   }
   .focus-outline {
-    @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
+    @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline;
   }
 }

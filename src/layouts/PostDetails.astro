@@ -3,6 +3,8 @@ import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Datetime from "@components/Datetime";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
+import Hr from "@components/Hr.astro";
+import Member from "@components/Member.astro";
 import Tag from "@components/Tag.astro";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
@@ -62,8 +64,10 @@ const layoutProps = {
       pubDatetime={pubDatetime}
       modDatetime={modDatetime}
       size="lg"
-      className="my-2"
+      className="my-4"
     />
+    <div class="my-8"><Member id={author as any} /></div>
+    <Hr noPadding />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
       <Content />
     </article>

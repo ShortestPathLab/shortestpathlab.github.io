@@ -14,7 +14,7 @@ export async function getStaticPaths() {
     props: { work },
   }));
 
-  return [...postResult];
+  return postResult;
 }
 
 const { work } = Astro.props;

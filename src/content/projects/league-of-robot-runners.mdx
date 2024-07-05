@@ -1,16 +1,20 @@
 ---
 title: League of Robot Runners
-description: Sponsored by Amazon Robotics, this is a competition on managing a fleet of robots in motion, a common problem in sectors like warehousing, transport, and advanced manufacturing.
+description: Sponsored by Amazon Robotics, this is a competition on managing a fleet of robots in motion.
 url: https://www.leagueofrobotrunners.org/
-image: /assets/lorr-banner.jpeg
+image: /assets/lorr-primary.jpg
 featured: true
+order: 1
+dark: false
 ---
 
 import Member from "@components/Member.astro";
 import Grid from "@components/Grid.astro";
 import MemberCard from "@components/MemberCard.astro";
 
-## Goals of the Competition
+![banner](/assets/lorr-wide.png)
+
+## The Competition
 
 The League of Robot Runners is a competition series to foster and advance research areas in the area of Multi-Agent Path Finding.
 LoRR aims to:
@@ -45,7 +49,7 @@ For more details about the setup, results, and resources of the 2023 competition
 
 In 2024, the competition will introduce new tracks with path planning and **task assignments** to reflect the challenges faced by real-world applications.
 
-Fill your email in the [My Submission](./setting) page to subscribe to our newsletter and receive updates about the upcoming competition!
+Fill your email in the [My Submission](https://www.leagueofrobotrunners.org/submission) page to subscribe to our newsletter and receive updates about the upcoming competition!
 
 ## Organisers
 
@@ -134,19 +138,20 @@ Fill your email in the [My Submission](./setting) page to subscribe to our newsl
 ### Advisors
 
 <Grid class="not-prose my-4 gap-8" width={200}>
-    <MemberCard
+  <MemberCard
     member={{
       title: "Kostas Bekris",
       description: "Rutgers University",
-      image: "https://github.com/MAPF-Competition/web_resource/blob/develop/external_page_resource/organisers/bekris_2018_01_small.jpg?raw=true",
+      image:
+        "https://github.com/MAPF-Competition/web_resource/blob/develop/external_page_resource/organisers/bekris_2018_01_small.jpg?raw=true",
     }}
   />
-
   <MemberCard
     member={{
       title: "Federico Pecora",
       description: "Amazon Robotics",
-      image: "https://github.com/MAPF-Competition/web_resource/blob/develop/external_page_resource/organisers/fede-pic.jpeg?raw=true",
+      image:
+        "https://github.com/MAPF-Competition/web_resource/blob/develop/external_page_resource/organisers/fede-pic.jpeg?raw=true",
     }}
   />
 </Grid>

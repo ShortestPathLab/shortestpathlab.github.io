@@ -10,12 +10,15 @@ import WorkCard from "@components/WorkCard.astro";
 import Layout from "@layouts/Layout.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { getCollection } from "astro:content";
-import { take } from "lodash-es";
+import { sortBy, take } from "lodash-es";
 import { getPublications } from "../content/getPublications";
 
 const posts = await getCollection("blog");
 const members = await getCollection("team");
-const works = (await getCollection("projects")).filter(c => c.data.featured);
+const works = sortBy(
+  (await getCollection("projects")).filter(c => c.data.featured),
+  c => c.data.order
+);
 const publications = await getPublications();
 
 const recentPosts = getSortedPosts(posts);
