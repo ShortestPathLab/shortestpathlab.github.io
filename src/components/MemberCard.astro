@@ -8,12 +8,14 @@ export interface Props {
 const { member } = Astro.props;
 ---
 
-<li class="list-none">
-  <div
-    class=`mb-4 h-12 min-h-12 w-12 min-w-12 rounded-full border-0 bg-cover bg-center`
-    style={`background-image: url('${member?.image ?? "/assets/white.png"}')`}
-  >
-  </div>
-  <h3 class="text-lg">{member?.title}</h3>
-  <p class="text-sm">{member?.description}</p>
-</li>
+<a href={member?.url ?? "#"}>
+  <li class="list-none">
+    <div
+      class=`mb-4 h-12 min-h-12 w-12 min-w-12 rounded-full border-0 bg-cover bg-center`
+      style={`background-image: url('${member?.image ?? "/assets/white.png"}')`}
+    >
+    </div>
+    <h3 class="text-lg">{member?.title}</h3>
+    <p class="text-sm">{member?.description}</p>
+  </li>
+</a>

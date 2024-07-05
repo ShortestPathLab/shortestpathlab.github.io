@@ -30,27 +30,24 @@ export interface Props {
       </div>
       <div class="footer-items">
         <section>
-          <h3>Footer</h3>
-          <p>Footer item</p>
-          <p>Footer item</p>
-          <p>Footer item</p>
+          <h3>ShortestPathLab</h3>
+          <p><a href="/">Home</a></p>
+          <p><a href="https://github.com/ShortestPathLab/">Github</a></p>
         </section>
         <section>
-          <h3>Footer</h3>
-          <p>Footer item</p>
-          <p>Footer item</p>
-          <p>Footer item</p>
+          <h3>Monash Optimisation</h3>
+          <p>
+            <a href="https://www.monash.edu/it/dsai/optimisation">Home</a>
+          </p>
         </section>
         <section>
-          <h3>Footer</h3>
-          <p>Footer item</p>
-          <p>Footer item</p>
-          <p>Footer item</p>
+          <h3>Monash University</h3>
+          <p><a href="https://www.monash.edu/">Home</a></p>
         </section>
       </div>
     </div>
     <div class="copyright-wrapper">
-      <span>Copyright &#169; {currentYear}</span>
+      <span>Copyright &#169; Monash University {currentYear}</span>
     </div>
   </div>
 </footer>
@@ -69,14 +66,14 @@ export interface Props {
     @apply flex flex-row px-4;
   }
   .footer-items {
-    @apply grid flex-[4] grid-flow-row-dense gap-16 sm:justify-between sm:text-right;
+    @apply grid flex-[4] grid-flow-row-dense justify-end gap-16 text-right;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
   }
   .footer-items section {
-    @apply ml-0 flex flex-col gap-2 pr-0 sm:mr-0;
+    @apply ml-0 mr-0 flex flex-col gap-2 pr-0;
   }
-  .footer-items section p {
-    @apply font-normal;
+  .footer-items section h3 {
+    @apply opacity-50;
   }
   .link-button {
     @apply my-1 p-2 hover:rotate-6;

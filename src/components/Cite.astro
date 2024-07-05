@@ -17,7 +17,7 @@ const p = find(publications, { id: source });
   {
     block: (
       <div class="not-prose">
-        <CardPublication client:idle pub={p} />
+        <CardPublication client:load pub={p} />
       </div>
     ),
     citation: p?.citation,

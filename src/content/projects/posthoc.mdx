@@ -1,16 +1,16 @@
 ---
 title: Posthoc
-description: Create simple and effective visualisations from logs to help you understand search.
+description: Create simple and effective visualisations from logs to help you understand search
 url: https://posthoc.pathfinding.ai
-image: https://posthoc.pathfinding.ai/img/gallery/mcp.png
+image: /assets/posthoc-wide.png
 featured: true
 order: 0
 ---
 
-import Cite from "@components/Cite.astro";
 import Member from "@components/Member.astro";
 import MemberCard from "@components/MemberCard.astro";
 import Grid from "@components/Grid.astro";
+import Cite from "@components/Cite.astro";
 
 ![banner](/assets/posthoc-wide.png)
 
@@ -29,18 +29,21 @@ import Grid from "@components/Grid.astro";
   />
 </Grid>
 
-## Some content here
+## The Framework for Understanding Search
 
-Lorem ipsum dolor sit amet <Cite source="antsfeld12" />, consectetur adipiscing elit.
-Donec est mi, facilisis ac massa quis, pellentesque imperdiet augue. Nulla porta
-lorem ac arcu interdum pellentesque. Suspendisse scelerisque tempus est, eu
-iaculis magna tincidunt eget. Praesent tortor tortor, hendrerit non ornare in,
-hendrerit in elit. Mauris eros elit, rutrum vitae vulputate quis, tempus sit
-amet eros. Aenean posuere et dolor id tempus. Donec eget turpis libero. Cras
-sagittis, ante ut semper sagittis, orci nibh tristique augue, vel placerat ante
-lorem sit amet sem. Pellentesque et magna nec felis finibus lacinia. In est
-felis, fermentum eget gravida a, pretium ut ante.
+We present Posthoc, a debugging and visualisation framework
+that helps users better understand how search algorithms work. Posthoc
+takes as input _search traces_, human-readable output logs produced
+by an algorithmic problem solving program. The logs are are used for
+subsequent playback, analysis and visualisation.
+Our system does not depend on any specific type of
+visualisation nor any particular decision-making schema. Being independent,
+Posthoc readily complements new and existing solvers: for AI planning,
+pathfinding, and heuristic search, and it can be integrated as a complementary
+problem-solving tool alongside.
 
-## References
+[Get started with Posthoc](https://posthoc.pathfinding.ai/docs/get-started)
 
-<Cite source="antsfeld12" variant="block" />
+## Cite This Project
+
+<Cite source="zheng2024posthoc" variant="block" />
