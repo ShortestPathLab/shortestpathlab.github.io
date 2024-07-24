@@ -25,7 +25,7 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
 const posts = groupBy(paginatedPosts, "type");
 ---
 
-<Layout title={`Publications | ${SITE.title}`}>
+<Layout title={`Publications - ${SITE.title}`}>
   <Header activeNav="publications" />
   <Main pageTitle="Publications" pageDesc="All the publications I've posted.">
     {

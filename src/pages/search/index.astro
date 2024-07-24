@@ -1,0 +1,30 @@
+---
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import SearchBar from "@components/Search";
+import Tag from "@components/Tag";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import { getSearchList } from "@utils/getSearchList";
+import { uniqueTags } from "@utils/getUniqueTags";
+
+const tags = await uniqueTags();
+
+const searchList = await getSearchList();
+---
+
+<Layout title={`Search - ${SITE.title}`}>
+  <Header />
+  <Main pageTitle="Search" pageDesc="All the tags used in posts.">
+    <div class="pt-1"><SearchBar client:load searchList={searchList} /></div>
+    <div class="pt-8"><hr /></div>
+    <div class="mb-8 mt-8">
+      <h2 class="mb-4 text-xl">Find by tag</h2>
+      <ul>
+        {tags.map(({ tag }) => <Tag {tag} size="lg" />)}
+      </ul>
+    </div>
+  </Main>
+  <Footer />
+</Layout>

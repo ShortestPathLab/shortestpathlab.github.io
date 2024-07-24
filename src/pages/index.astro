@@ -1,11 +1,10 @@
 ---
 import Card from "@components/Card";
-import { CardPublication } from "@components/PublicationCard";
 import Footer from "@components/Footer.astro";
 import Grid from "@components/Grid.astro";
 import Header from "@components/Header.astro";
+import { CardPublication } from "@components/PublicationCard";
 import SeeAllLink from "@components/SeeAllLink.astro";
-import MemberCard from "@components/MemberCard.astro";
 import WorkCard from "@components/WorkCard.astro";
 import Layout from "@layouts/Layout.astro";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -14,7 +13,6 @@ import { sortBy, take } from "lodash-es";
 import { getPublications } from "../content/getPublications";
 
 const posts = await getCollection("blog");
-const members = await getCollection("team");
 const works = sortBy(
   (await getCollection("projects")).filter(c => c.data.featured),
   c => c.data.order
@@ -36,7 +34,7 @@ const recentPosts = getSortedPosts(posts);
       </p>
     </section>
 
-    <section id="featured">
+    <section class="featured wide md:hidden">
       <h2>
         Featured projects
         <div id="featured-gallery-controls">
@@ -61,28 +59,19 @@ const recentPosts = getSortedPosts(posts);
       </div>
       <SeeAllLink href="/projects" primary="See all projects" />
     </section>
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
-          </ul>
-          <SeeAllLink primary="See all posts" href="/posts/" />
-        </section>
-      )
-    }
-
+    <section class="featured md:block hidden">
+      <h2>Featured projects</h2>
+      <Grid class="mt-8 gap-4">
+        {
+          works.map(work => (
+            <div class="min-w-80">
+              <WorkCard work={work} />
+            </div>
+          ))
+        }
+      </Grid>
+      <SeeAllLink href="/projects" primary="See all projects" />
+    </section>
     <section id="publications">
       <h2>Publications</h2>
       <ul>
@@ -94,23 +83,18 @@ const recentPosts = getSortedPosts(posts);
       </ul>
       <SeeAllLink href="/publications" primary="See all publications" />
     </section>
-
-    <section id="team">
-      <h2>Team</h2>
-      <Grid width={280} class="my-8 justify-between gap-12">
-        {members.map(c => <MemberCard member={c.data} />)}
-      </Grid>
-      <SeeAllLink primary="About the lab" href="/about/" />
-    </section>
   </main>
 
   <Footer />
 </Layout>
 
 <style>
+  #main-content {
+    @apply bg-skin-fill;
+  }
   /* ===== Hero Section ===== */
   #hero {
-    @apply pb-12 pt-24 sm:pb-24 sm:pt-32;
+    @apply pb-12 pt-24 sm:pb-32 sm:pt-36;
   }
   #hero h1 {
     @apply my-2 inline-block text-2xl font-medium sm:my-2 sm:text-4xl;
@@ -135,22 +119,20 @@ const recentPosts = getSortedPosts(posts);
   }
 
   /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
+  .featured,
   #recent-posts,
   #publications,
   #team {
-    @apply pb-6 pt-12;
+    @apply pb-6;
   }
-  #featured h2,
+  .featured h2,
   #publications h2,
   #recent-posts h2,
   #team h2 {
     @apply text-2xl font-medium;
   }
 
-  #featured {
-  }
-  #featured > div {
+  .featured.wide > div {
     @apply mt-8 snap-x snap-mandatory overflow-x-scroll;
     width: calc(var(--vw, 1vw) * 100);
     margin-left: calc(50% - calc(var(--vw, 1vw) * 50));
@@ -161,18 +143,18 @@ const recentPosts = getSortedPosts(posts);
       calc(calc(calc(var(--vw, 1vw) * 100) - min(64rem, 100%)) / 2) + 1rem
     );
   }
-  #featured > div::-webkit-scrollbar {
+  .featured.wide > div::-webkit-scrollbar {
     height: 0px;
   }
-  #featured > div > ul {
+  .featured.wide > div > ul {
     @apply w-fit;
     padding: 0 calc(64rem + 1rem);
   }
 
-  #featured > div > ul > * {
+  .featured.wide > div > ul > * {
     @apply snap-start;
   }
-  #featured > h2 {
+  .featured.wide > h2 {
     @apply flex flex-row justify-between;
   }
   #featured-gallery-controls {
@@ -184,8 +166,8 @@ const recentPosts = getSortedPosts(posts);
 </style>
 <script data-astro-rerun>
   document.addEventListener("astro:page-load", () => {
-    const box = document.querySelector("#featured > div");
-    const elements = document.querySelectorAll("#featured > div > ul > *");
+    const box = document.querySelector(".featured.wide > div");
+    const elements = document.querySelectorAll(".featured.wide > div > ul > *");
     box.addEventListener("scroll", () => {
       for (const elem of elements) {
         const a = elem.getBoundingClientRect();

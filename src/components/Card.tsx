@@ -1,7 +1,7 @@
 import { slugifyStr } from "@utils/slugify";
-import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
+import Datetime from "./Datetime";
 
 export interface Props {
   href?: string;
@@ -13,23 +13,22 @@ export function CardBase({
   primary,
   secondary,
   description,
-  secHeading,
   href,
   slug,
+  ...props
 }: {
   primary?: string;
   secondary?: ReactNode;
   description?: ReactNode;
   href?: string;
-  secHeading?: boolean;
   slug?: string;
-}) {
+} & ComponentProps<"li">) {
   const headerProps = {
     style: { viewTransitionName: slugifyStr(slug ?? primary ?? "") },
     className: href ? `hover:underline` : "",
   };
   return (
-    <li className="my-6 list-none">
+    <li className="my-6 list-none" {...props}>
       <a
         href={href}
         className={`mb-2 inline-block text-lg font-medium ${href ? "underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0" : ""}`}
@@ -45,13 +44,12 @@ export function CardBase({
     </li>
   );
 }
-export default function Card({ href, frontmatter, secHeading = true }: Props) {
+export default function Card({ href, frontmatter }: Props) {
   const { title, pubDatetime, modDatetime, description } = frontmatter;
 
   return (
     <CardBase
       href={href}
-      secHeading={secHeading}
       primary={title}
       description={<p className="mt-2">{description}</p>}
       secondary={

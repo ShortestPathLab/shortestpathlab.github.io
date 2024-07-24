@@ -3,28 +3,29 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-import MemberCard from "@components/MemberCard.astro";
-import Grid from "@components/Grid.astro";
-import { getCollection } from "astro:content";
+Hello! You've reached the webpages of The Shortest Path Lab (SPL), a research group at Monash University led by A/Prof Daniel Harabor. Unfortunately this site isn't finished yet. Please excuse the mess!
 
-## Members
+---
 
-### Current
+![Woodside](https://d31dpzy4bseog7.cloudfront.net/media/2022/11/11142346/Monash-University-Woodside-Building-for-Technology-Design-by-Grimshaw-with-Monash-University-Issue-10-Commercial-Feature-The-Local-Project-Image-14.jpg)
 
-<Grid class="not-prose my-4">
-  {(await getCollection("team"))
-    .filter(c => !c.data.alumni)
-    .map(c => (
-      <MemberCard member={c.data} />
-    ))}
-</Grid>
+ShortestPathLab develops algorithms for single and multi-agent pathfinding. We study these problems using the tools of AI Planning and Heuristic Search and we consider their application in a variety of real-world settings. Some examples of applications which typically motivate our work: pathfinding in video games, routing and trip planning in transportation networks, motion planning and navigation for mobile robots and automated warehouse logistics.
 
-### Alumni
+## Location
 
-<Grid class="not-prose my-4">
-  {(await getCollection("team"))
-    .filter(c => c.data.alumni)
-    .map(c => (
-      <MemberCard member={c.data} />
-    ))}
-</Grid>
+Level 2, 20 Exhibition Walk, Clayton VIC 3168
+
+<figure>
+  <iframe
+    width="100%"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    allowfullscreen
+    src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-37.9142%2C145.1347&key=AIzaSyD0P6XKKA8272io_9Y0_Tru_Sx1xUa4e0Q"
+  />
+</figure>
+
+## Contact
+
+shortest-path-lab@monash.edu

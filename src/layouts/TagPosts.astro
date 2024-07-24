@@ -1,17 +1,18 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Pagination from "@components/Pagination.astro";
+import type { SearchItem } from "@components/Search";
+import SearchResultList from "@components/SearchResultList";
+import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import Card from "@components/Card";
-import Pagination from "@components/Pagination.astro";
-import { SITE } from "@config";
+import { map } from "lodash-es";
 
 export interface Props {
   currentPage: number;
   totalPages: number;
-  paginatedPosts: CollectionEntry<"blog">[];
+  paginatedPosts: SearchItem[];
   tag: string;
   tagName: string;
 }
@@ -19,30 +20,25 @@ export interface Props {
 const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
 ---
 
-<Layout title={`Tag: ${tagName} | ${SITE.title}`}>
+<Layout title={`Tag: ${tagName} - ${SITE.title}`}>
   <Header activeNav="tags" />
   <Main
-    pageTitle={[`Tag:`, `${tagName}`]}
+    pageTitle={[`#`, `${tagName}`]}
     titleTransition={tag}
     pageDesc={`All the articles with the tag "${tagName}".`}
   >
-    <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
-    <ul>
-      {
-        paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
-        ))
-      }
-    </ul>
+    <h1 slot="title" transition:name={tag}>{`# ${tag}`}</h1>
+    <SearchResultList list={map(paginatedPosts, item => ({ item }))} />
   </Main>
 
   <Pagination
+    variant="previous-next"
     {currentPage}
     {totalPages}
-    prevUrl={`/tags/${tag}${
+    prevUrl={`/search/${tag}${
       currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""
     }/`}
-    nextUrl={`/tags/${tag}/${currentPage + 1}/`}
+    nextUrl={`/search/${tag}/${currentPage + 1}/`}
   />
 
   <Footer noMarginTop={totalPages > 1} />

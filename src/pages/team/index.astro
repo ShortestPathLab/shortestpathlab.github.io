@@ -1,0 +1,41 @@
+---
+import Footer from "@components/Footer.astro";
+import Grid from "@components/Grid.astro";
+import Header from "@components/Header.astro";
+import MemberCard from "@components/MemberCard.astro";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import { getCollection } from "astro:content";
+import { entries, groupBy, startCase } from "lodash-es";
+
+const members = await getCollection("team");
+
+const groups = groupBy(members, c => (c.data.alumni ? "alumni" : "current"));
+---
+
+<Layout title={`Team - ${SITE.title}`}>
+  <Header activeNav="team" />
+  <Main pageTitle="People" pageDesc="Members of ShortestPathLab.">
+    {
+      entries(groups)
+        .toReversed()
+        .map(([k, v]) => (
+          <>
+            <h2>{startCase(k)}</h2>
+            <Grid width={200} class="my-8 justify-between gap-12">
+              {v.map(c => (
+                <MemberCard member={c.data} id={c.id} />
+              ))}
+            </Grid>
+          </>
+        ))
+    }</Main
+  >
+</Layout>
+<Footer />
+<style>
+  h2 {
+    @apply mt-8 text-xl sm:text-2xl;
+  }
+</style>

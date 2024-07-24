@@ -1,5 +1,6 @@
 import { SITE } from "@config";
 import getPageNumbers from "./getPageNumbers";
+import { chunk, find } from "lodash-es";
 
 interface GetPaginationProps<T> {
   posts: T;
@@ -32,6 +33,18 @@ const getPagination = <T>({
     currentPage,
     paginatedPosts,
   };
+};
+
+export const getPageNumberByPost = <T>(
+  post: T,
+  props: Partial<GetPaginationProps<T[]>>,
+  compare = (a: T, b: T) => a === b
+) => {
+  const chunks = chunk(props.posts, props.postPerPage || SITE.postPerPage);
+  for (const [chunk, i] of chunks.map((k, i) => [k, i] as const)) {
+    if (find(chunk, p => compare(p, post))) return i + 1;
+  }
+  return 0;
 };
 
 export default getPagination;

@@ -1,0 +1,29 @@
+---
+import TagPosts from "@layouts/TagPosts.astro";
+import getPagination from "@utils/getPagination";
+import { getSearchList, getSearchResultsByTag } from "@utils/getSearchList";
+import { uniqueTags } from "@utils/getUniqueTags";
+
+export async function getStaticPaths() {
+  const tags = await uniqueTags();
+
+  return tags.map(({ tag, tagName }) => {
+    return {
+      params: { tag },
+      props: { tag, tagName },
+    };
+  });
+}
+const { tag, tagName } = Astro.props;
+
+const searchList = await getSearchList();
+
+const tagPosts = getSearchResultsByTag(tag, searchList);
+
+const pagination = getPagination({
+  posts: tagPosts,
+  page: 1,
+});
+---
+
+<TagPosts {...pagination} {tag} {tagName} />

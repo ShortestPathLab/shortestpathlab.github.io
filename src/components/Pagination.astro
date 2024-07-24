@@ -6,12 +6,24 @@ export interface Props {
   totalPages: number;
   prevUrl: string;
   nextUrl: string;
+  variant?: "newer-older" | "previous-next";
 }
 
-const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+const {
+  currentPage,
+  totalPages,
+  prevUrl,
+  nextUrl,
+  variant = "newer-older",
+} = Astro.props;
 
 const prev = currentPage > 1 ? "" : "disabled";
 const next = currentPage < totalPages ? "" : "disabled";
+
+const labels = {
+  "newer-older": { prev: "Newer", next: "Older" },
+  "previous-next": { prev: "Previous", next: "Next" },
+};
 ---
 
 {
@@ -24,7 +36,7 @@ const next = currentPage < totalPages ? "" : "disabled";
         ariaLabel="Previous"
       >
         <span class="material-symbols-outlined">chevron_backward</span>
-        Newer
+        {labels[variant].prev}
       </LinkButton>
       {currentPage} of {totalPages}
       <LinkButton
@@ -33,7 +45,7 @@ const next = currentPage < totalPages ? "" : "disabled";
         className={`ml-4 select-none ${next} flex flex-row justify-center`}
         ariaLabel="Next"
       >
-        Older
+        {labels[variant].next}
         <span class="material-symbols-outlined">chevron_forward</span>
       </LinkButton>
     </nav>
@@ -42,7 +54,7 @@ const next = currentPage < totalPages ? "" : "disabled";
 
 <style>
   .pagination-wrapper {
-    @apply mb-8 mt-auto flex justify-center;
+    @apply mt-auto flex justify-center bg-skin-fill pb-16;
   }
   .disabled {
     @apply pointer-events-none select-none opacity-50 hover:text-skin-base group-hover:fill-skin-base;
