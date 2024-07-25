@@ -160,17 +160,17 @@ const publications = await getPublications();
     @apply my-8 text-center;
   }
 </style>
-<script data-astro-rerun>
+<script is:inline data-astro-rerun>
   document.addEventListener("astro:page-load", () => {
-    const box = document.querySelector(".featured.wide > div");
+    const box = document?.querySelector?.(".featured.wide > div");
     document
-      .querySelector("#featured-gallery-controls > .left")
-      .addEventListener("click", () => {
+      ?.querySelector?.("#featured-gallery-controls > .left")
+      ?.addEventListener?.("click", () => {
         box.scrollBy({ left: -320, behavior: "smooth" });
       });
     document
-      .querySelector("#featured-gallery-controls > .right")
-      .addEventListener("click", () => {
+      ?.querySelector?.("#featured-gallery-controls > .right")
+      ?.addEventListener?.("click", () => {
         box.scrollBy({ left: 320, behavior: "smooth" });
       });
   });

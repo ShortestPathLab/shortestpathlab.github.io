@@ -23,21 +23,18 @@ export function CardBase({
   href?: string;
   slug?: string;
 } & ComponentProps<"li">) {
-  const headerProps = {
-    style: { viewTransitionName: slugifyStr(slug ?? primary ?? "") },
-    className: href ? `hover:underline` : "",
-  };
   return (
     <li className="my-6 list-none" {...props}>
       <a
         href={href}
         className={`mb-2 inline-block text-lg font-medium ${href ? "underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0" : ""}`}
       >
-        {true ? (
-          <h2 {...headerProps}>{primary}</h2>
-        ) : (
-          <h3 {...headerProps}>{primary}</h3>
-        )}
+        <h2
+          style={{ viewTransitionName: slugifyStr(slug ?? primary ?? "") }}
+          className={href ? `hover:underline` : ""}
+        >
+          {primary}
+        </h2>
       </a>
       {secondary}
       <div>{description}</div>

@@ -47,7 +47,11 @@ export const getPublications = once(async () => {
           lang: "en-us",
         }),
         url: c.DOI ? `https://doi.org/${c.DOI}` : c.URL,
-        pdf: c.pdf ? (startsWith("http") ? c.pdf : `/pdf/${c.pdf}`) : undefined,
+        pdf: c.pdf
+          ? startsWith(c.pdf, "http")
+            ? c.pdf
+            : `/pdf/${c.pdf}`
+          : undefined,
         title: c.title,
         year: c.issued["date-parts"][0][YEAR] || 0,
         month: c.issued["date-parts"][0][MONTH] || 0,
