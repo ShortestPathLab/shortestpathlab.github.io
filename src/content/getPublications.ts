@@ -1,4 +1,4 @@
-import { chain, once, trim, values } from "lodash-es";
+import { chain, once, startsWith, trim, values } from "lodash-es";
 ///@ts-ignore
 import { Cite, plugins } from "@citation-js/core";
 import "@citation-js/plugin-bibtex";
@@ -47,7 +47,7 @@ export const getPublications = once(async () => {
           lang: "en-us",
         }),
         url: c.DOI ? `https://doi.org/${c.DOI}` : c.URL,
-        pdf: c.pdf,
+        pdf: c.pdf ? (startsWith("http") ? c.pdf : `/pdf/${c.pdf}`) : undefined,
         title: c.title,
         year: c.issued["date-parts"][0][YEAR] || 0,
         month: c.issued["date-parts"][0][MONTH] || 0,
