@@ -3,17 +3,15 @@ import TagPosts from "@layouts/TagPosts.astro";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
 import { getSearchList, getSearchResultsByTag } from "@utils/getSearchList";
-import getUniqueTags from "@utils/getUniqueTags";
-import { type CollectionEntry } from "astro:content";
+import { uniqueTags } from "@utils/getUniqueTags";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
   tag: string;
   tagName: string;
 }
 
 export async function getStaticPaths() {
-  const tags = getUniqueTags();
+  const tags = await uniqueTags();
   const searchList = await getSearchList();
   return tags.flatMap(({ tag, tagName }) => {
     const tagPosts = getSearchResultsByTag(tag, searchList);
