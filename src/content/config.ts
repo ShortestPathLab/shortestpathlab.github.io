@@ -53,7 +53,6 @@ const team = defineCollection({
       role: z.string().optional(),
       url: z.string().optional(),
       image: z.string().optional(),
-      alumni: z.boolean().optional(),
       tags: z.array(z.string()).default(["untagged"]),
     }),
 });

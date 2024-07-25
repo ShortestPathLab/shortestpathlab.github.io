@@ -1,5 +1,4 @@
 ---
-import Card from "@components/Card";
 import Footer from "@components/Footer.astro";
 import Grid from "@components/Grid.astro";
 import Header from "@components/Header.astro";
@@ -7,19 +6,15 @@ import { CardPublication } from "@components/PublicationCard";
 import SeeAllLink from "@components/SeeAllLink.astro";
 import WorkCard from "@components/WorkCard.astro";
 import Layout from "@layouts/Layout.astro";
-import getSortedPosts from "@utils/getSortedPosts";
 import { getCollection } from "astro:content";
 import { sortBy, take } from "lodash-es";
 import { getPublications } from "../content/getPublications";
 
-const posts = await getCollection("blog");
 const works = sortBy(
   (await getCollection("projects")).filter(c => c.data.featured),
   c => c.data.order
 );
 const publications = await getPublications();
-
-const recentPosts = getSortedPosts(posts);
 ---
 
 <Layout>
@@ -32,6 +27,7 @@ const recentPosts = getSortedPosts(posts);
         ShortestPathLab is a research group at Monash University led by A/Prof
         Daniel Harabor for AI planning and heuristic search.
       </p>
+      <SeeAllLink href="/about" primary="About ShortestPathLab" />
     </section>
 
     <section class="featured wide md:hidden">
@@ -59,7 +55,7 @@ const recentPosts = getSortedPosts(posts);
       </div>
       <SeeAllLink href="/projects" primary="See all projects" />
     </section>
-    <section class="featured md:block hidden">
+    <section class="featured hidden md:block">
       <h2>Featured projects</h2>
       <Grid class="mt-8 gap-4">
         {
@@ -167,13 +163,6 @@ const recentPosts = getSortedPosts(posts);
 <script data-astro-rerun>
   document.addEventListener("astro:page-load", () => {
     const box = document.querySelector(".featured.wide > div");
-    const elements = document.querySelectorAll(".featured.wide > div > ul > *");
-    box.addEventListener("scroll", () => {
-      for (const elem of elements) {
-        const a = elem.getBoundingClientRect();
-        elem.style.setProperty("--in", `${1 - a.left ** 2}`);
-      }
-    });
     document
       .querySelector("#featured-gallery-controls > .left")
       .addEventListener("click", () => {

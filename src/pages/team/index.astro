@@ -7,11 +7,11 @@ import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
 import { getCollection } from "astro:content";
-import { entries, groupBy, startCase } from "lodash-es";
+import { entries, groupBy, head, startCase } from "lodash-es";
 
 const members = await getCollection("team");
 
-const groups = groupBy(members, c => (c.data.alumni ? "alumni" : "current"));
+const groups = groupBy(members, c => head(c.id.split("/")));
 ---
 
 <Layout title={`Team - ${SITE.title}`}>

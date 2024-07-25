@@ -15,7 +15,9 @@ export function CardPublication({ pub }: { pub?: Publication }) {
           <>
             {!!pub?.tags?.length && (
               <ul className="-mt-2 mb-1">
-                {pub?.tags?.map?.(tag => <Tag tag={slugifyStr(tag)} />)}
+                {pub?.tags?.map?.(tag => (
+                  <Tag key={tag} tag={slugifyStr(tag)} />
+                ))}
               </ul>
             )}
             <span
