@@ -1,12 +1,16 @@
 ---
-import { startCase } from "lodash-es";
+import { slice, startCase } from "lodash-es";
 
 // Remove current url path and remove trailing slash if exists
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 
 // Get url array from path
 // eg: /search/tailwindcss => ['tags', 'tailwindcss']
-const breadcrumbList = currentUrlPath.split("/").slice(1);
+const breadcrumbList2 = currentUrlPath.split("/").slice(1);
+const breadcrumbList = breadcrumbList2.map((c, i) => ({
+  name: c,
+  path: `/${slice(breadcrumbList2, 0, i + 1).join("/")}`,
+}));
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
@@ -36,17 +40,17 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
         >
       </li>
       {
-        breadcrumbList.map((breadcrumb, index) =>
+        breadcrumbList.map(({ name, path }, index) =>
           index + 1 === breadcrumbList.length ? (
             <li>
               <span class={`capitalize opacity-50`} aria-current="page">
                 {/* make the last part lowercase in Home > Tags > some-tag */}
-                {startCase(decodeURIComponent(breadcrumb))}
+                {startCase(decodeURIComponent(name))}
               </span>
             </li>
           ) : (
             <li>
-              <a href={`/${breadcrumb}/`}>{breadcrumb}</a>
+              <a href={path}>{name}</a>
               <span aria-hidden="true" class="inline-block px-1 opacity-50">
                 {"/"}
               </span>
