@@ -57,7 +57,11 @@ export const getPublications = once(async () => {
         month: c.issued["date-parts"][0][MONTH] || 0,
         date: c.issued["date-parts"][0][DATE] || 0,
         tags: c.annote
-          ? chain(c.annote).split(",").map(trim).value()
+          ? chain(c.annote)
+              .split(",")
+              .map(trim)
+              .map(v => chain(v).kebabCase().replace("-", "").value())
+              .value()
           : ["untagged"],
       })
     )
