@@ -14,7 +14,7 @@ module.exports = {
     // Remove the following screen breakpoint or add other breakpoints
     // if one breakpoint is not enough for you
     screens: {
-      sm: "720px",
+      sm: "780px",
       md: "1200px",
     },
 
