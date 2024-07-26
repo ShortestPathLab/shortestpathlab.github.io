@@ -1,5 +1,7 @@
 ---
+import { SOCIALS } from "@config";
 import { LOGO_IMAGE, SITE } from "@config";
+import { Icon } from "astro-icon/components";
 
 const currentYear = new Date().getFullYear();
 
@@ -46,8 +48,21 @@ export interface Props {
         </section>
       </div>
     </div>
-    <div class="copyright-wrapper">
-      <span>Copyright &#169; Monash University {currentYear}</span>
+
+    <div class="px-4 opacity-40"><hr /></div>
+    <div class="flex flex-row items-center px-4 sm:py-4">
+      <span class="whitespace-nowrap text-sm opacity-50"
+        >Copyright &#169; Monash University {currentYear}</span
+      ><div class="flex-grow"></div>
+      <div class="flex gap-6">
+        {
+          SOCIALS.map(({ href, name }) => (
+            <a href={href}>
+              <Icon name={name} class="w-5 hover:text-skin-accent" />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </footer>
@@ -66,7 +81,7 @@ export interface Props {
     @apply flex flex-row px-4;
   }
   .footer-items {
-    @apply grid flex-[4] grid-flow-row-dense justify-end gap-16 text-right;
+    @apply grid flex-[4] grid-flow-row-dense justify-end gap-8 text-right sm:gap-16;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
   }
   .footer-items section {
@@ -80,9 +95,6 @@ export interface Props {
   }
   .link-button svg {
     @apply scale-125;
-  }
-  .copyright-wrapper {
-    @apply my-4 flex flex-col self-end whitespace-nowrap px-4 text-sm opacity-50 sm:flex-row;
   }
   .separator {
     @apply hidden sm:inline;
