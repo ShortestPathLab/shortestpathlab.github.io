@@ -7,7 +7,7 @@ export const SITE: Site = {
   title: "ShortestPathLab",
   ogImage: "shortestpathlab-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 10,
+  postPerPage: 99999,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
 
