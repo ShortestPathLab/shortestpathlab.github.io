@@ -40,7 +40,7 @@ export async function getSearchList() {
         title: `${paper.year} / ${paper.title}`,
         tags: paper.tags,
         verbatim: paper.formatted,
-        url: `/publications/${getPageNumberByPost(paper, { posts: papers })}#${slugifyStr(paper.title ?? "")}`,
+        url: `/publications/${getPageNumberByPost(paper, { posts: papers })}/#${slugifyStr(paper.title ?? "")}`,
         year: paper.year ?? 0,
         slug: paper.title,
       }))
