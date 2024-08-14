@@ -9,10 +9,15 @@ import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { sortBy, take } from "lodash-es";
 import { getPublications } from "../content/getPublications";
+import Card from "@components/Card";
 
 const works = sortBy(
   (await getCollection("projects")).filter(c => c.data.featured),
   c => c.data.order
+);
+const recentPosts = sortBy(
+  (await getCollection("blog")).filter(c => c.data.featured),
+  c => -c.data.pubDatetime
 );
 const publications = await getPublications();
 ---
@@ -79,6 +84,27 @@ const publications = await getPublications();
       </ul>
       <SeeAllLink href="/publications" primary="See all publications" />
     </section>
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts">
+          <h2>News</h2>
+          <ul>
+            {recentPosts.map(
+              ({ data, slug }, index) =>
+                index < 4 && (
+                  <Card
+                    href={`/news/${slug}/`}
+                    frontmatter={data}
+                    secHeading={false}
+                  />
+                )
+            )}
+          </ul>
+          <SeeAllLink primary="See all posts" href="/posts/" />
+        </section>
+      )
+    }
   </main>
   <Footer />
 </Layout>
