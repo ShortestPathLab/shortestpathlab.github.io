@@ -2,7 +2,7 @@
 author: current/kzheng
 pubDatetime: 2024-08-14T06:39:57Z
 modDatetime: 2024-08-14T06:39:57Z
-title: Summer research scholarship 2024 applications now open!
+title: Summer research scholarships 2024 applications now open!
 slug: summer-research-2024
 featured: true
 draft: false
