@@ -25,7 +25,7 @@ This summer, ShortestPathLab is offering two exciting research projects:
 
 ### 1. Posthoc: The Pathfinding Search Visualiser and Debugger
 
-In this project, you'll work on enhancing **Posthoc**, an award-winning tool that helps researchers visualise and debug pathfinding algorithms. Your role will involve implementing new features that will make it easier for researchers to create and use visualisations. This is a fantastic opportunity to contribute to a tool that is crucial for understanding and improving complex algorithms.
+In this project, you'll work on enhancing [Posthoc](/projects/posthoc/), an award-winning tool that helps researchers visualise and debug pathfinding algorithms. Your role will involve implementing new features that will make it easier for researchers to create and use visualisations. This is a fantastic opportunity to contribute to a tool that is crucial for understanding and improving complex algorithms.
 
 For project details and how to apply, [see here](https://www.monash.edu/study/fees-scholarships/scholarships/summer-winter/view?area=1-Faculty%20of%20Information%20Technology#:~:text=3625).
 
