@@ -56,6 +56,7 @@ module.exports = {
       },
       fontFamily: {
         mono: ["Inter Tight", "sans-serif"],
+        code: ["Consolas", "monospace"],
       },
 
       typography: {

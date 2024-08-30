@@ -48,23 +48,24 @@
     sm:scale-110;
   }
   .prose {
-    @apply prose-headings:!mb-3 prose-headings:!font-medium prose-headings:!text-skin-base
-    prose-h3:!mt-8 prose-p:!text-skin-base
+    @apply prose-code:!font-code prose-headings:!mb-3 prose-headings:!font-medium
+    prose-headings:!text-skin-base prose-h3:!mt-8 prose-p:!text-skin-base
     prose-a:!text-skin-base prose-a:underline-offset-4
-    hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
-    prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
-    prose-figure:overflow-hidden prose-figure:rounded-md prose-figcaption:!text-skin-base
-    prose-figcaption:opacity-70 prose-strong:!text-skin-base
-    prose-code:rounded prose-code:bg-skin-card 
-    prose-code:bg-opacity-75 prose-code:p-1 
-    prose-code:before:!content-none prose-code:after:!content-none
-    prose-ol:!text-skin-base 
-    prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-base
-    prose-table:text-skin-base prose-th:border
-    prose-th:border-skin-line prose-td:border 
-    prose-td:border-skin-line prose-img:!my-2 
-    prose-img:mx-auto
-    prose-img:rounded-md prose-hr:!border-skin-fill;
+    hover:prose-a:text-skin-accent
+    prose-blockquote:!border-l-skin-accent prose-blockquote:border-opacity-50
+    prose-blockquote:opacity-80 prose-figure:overflow-hidden
+    prose-figure:rounded-md prose-figcaption:!text-skin-base prose-figcaption:opacity-70
+    prose-strong:!text-skin-base prose-code:rounded
+    prose-code:bg-skin-card prose-code:bg-opacity-35 
+    prose-code:p-1 prose-code:before:!content-none 
+    prose-code:after:!content-none prose-ol:!text-skin-base
+    prose-ul:overflow-x-clip 
+    prose-ul:!text-skin-base prose-li:marker:!text-skin-base prose-table:text-skin-base
+    prose-th:border prose-th:border-skin-line
+    prose-td:border prose-td:border-skin-line 
+    prose-img:!my-2 prose-img:mx-auto 
+    prose-img:rounded-md
+    prose-video:rounded-md prose-hr:!border-skin-fill;
   }
   .prose a {
     @apply break-words hover:!text-skin-accent;
