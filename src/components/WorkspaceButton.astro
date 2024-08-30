@@ -12,9 +12,9 @@ const { id, name } = Astro.props;
 <a
   href={`https://posthoc-app.pathfinding.ai?workspace=${encodeURIComponent(BASE_URL(id))}`}
   target="_blank"
-  class="not-prose flex min-w-max max-w-max flex-row items-center gap-2 rounded-md bg-skin-inverted px-4 py-2"
+  class="not-prose flex max-w-max flex-row items-center gap-2 truncate rounded-md bg-skin-inverted px-4 py-2"
 >
   <span class="material-symbols-outlined text-skin-inverted">workspaces</span>
   <span class="text-skin-inverted">Open in Posthoc</span>
-  <span class="text-skin-inverted text-opacity-70">{name}</span>
+  <span class="truncate text-skin-inverted text-opacity-70">{name}</span>
 </a>
