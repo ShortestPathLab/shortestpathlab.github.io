@@ -14,6 +14,8 @@ tags:
   - fit5222
 ---
 
+import WorkspaceButton from "@components/WorkspaceButton.astro";
+
 Hey FIT5222 students,
 
 We just released Posthoc integration with Piglet, the pathfinding solver in Python. Leverage the power of visualisation to debug and understand the code you write in Piglet.
@@ -98,6 +100,8 @@ If you'd prefer to output the trace to a file, use the `--log trace-file` argume
 python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-file -lf my-trace.trace.yaml -x 30 -n 1
 ```
 
+<WorkspaceButton id="my-trace" name="Example on Arena 2" />
+
 <video width="100%" controls>
   <source src="/assets/clips/trace-file.mp4" type="video/mp4" />
 </video>
@@ -136,9 +140,13 @@ Generate search traces for breadth-first search and depth-first search using the
 python3 piglet.py -p ./example/arena2.map.scen -f graph -s breadth --log trace-file -t 0.05 -x 2 -n 1
 ```
 
+<WorkspaceButton id="bfs" name="BFS on Arena 2" />
+
 ```bash
 python3 piglet.py -p ./example/arena2.map.scen -f graph -s depth --log trace-file -t 0.05 -x 2 -n 1
 ```
+
+<WorkspaceButton id="dfs" name="DFS on Arena 2" />
 
 To limit the size of the output, a small problem instance is selected using the `-x` and `-n` arguments, and the runtime is limited to 10 milliseconds with the `-t` argument.
 
@@ -162,6 +170,8 @@ Run the following command to generate an A\* search trace and try out different 
 python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-file -x 100 -n 1
 ```
 
+<WorkspaceButton id="astar" name="A* on Arena 2" />
+
 Explore the following:
 
 - Inspect the search in the Viewport.
@@ -177,13 +187,17 @@ python3 piglet.py -p ./example/example_8_puzzle.scen -f tree -s a-star --log tra
   <source src="/assets/clips/nine-tile.mp4" type="video/mp4" />
 </video>
 
+<WorkspaceButton id="nine-tile" name="9 Tile Puzzle" />
+
 ### Comparing A\* and Weighted A\* Search
 
 See how A\* search compares with A\* search that uses a weighted heuristic. Run the following command, replacing `WEIGHT` with values such as 0, 0.5, 1.0, and 8.0:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --heuristic-weight WEIGHT --log trace-file -x 8 -n 1
+python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --heuristic-weight WEIGHT --log trace-file -x 50 -n 1
 ```
+
+<WorkspaceButton id="astar-half-h" name="A* 50% Heuristic Weight on Arena 2" />
 
 Experiment with the following:
 
