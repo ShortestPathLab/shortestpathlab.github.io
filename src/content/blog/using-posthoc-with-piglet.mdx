@@ -87,17 +87,17 @@ Before proceeding, make sure you clone or pull the latest version of Piglet from
 Piglet provides built-in support for outputting search traces, and the process is flexible based on your needs. To generate these traces, you can use the `--log trace` argument in the command line. This argument will print the search trace directly to the console:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace -x 30 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace -x 30 -n 1
 ```
 
 <video width="100%" controls>
   <source src="/assets/clips/trace-console.mp4" type="video/mp4" />
 </video>
 
-If you'd prefer to output the trace to a file, use the `--log trace-file` argument. By default, this will create a randomly named file in your current directory. To specify a custom filename, add the `-lf [filenamehere]` argument, where `lf` is short for `log-filename`:
+If you'd prefer to output the trace to a file, use the `--log trace filename.trace.yaml` or `--log trace-file` argument. The `trace-file` argument will create a randomly named file in your current directory. If you wish, you can also use a Bash redirection operator `>` to direct any console output to a trace file.
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-file -lf my-trace.trace.yaml -x 30 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace my-trace.trace.yaml -x 30 -n 1
 ```
 
 <WorkspaceButton id="my-trace" name="Example on Arena 2" />
@@ -109,7 +109,7 @@ python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-fi
 Since scenario files often contain hundreds of problem instances, it is helpful to use the `--problem-index` (`-x`) and `--problem-number` (`-n`) arguments to specify which specific problem to run and generate a search trace for. For example:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace -x 30 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace -x 30 -n 1
 ```
 
 <video width="100%" controls>
@@ -137,13 +137,13 @@ These exercises will help you understand how to use Posthoc with Piglet in diffe
 Generate search traces for breadth-first search and depth-first search using the arena2 map. Use the following commands:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s breadth --log trace-file -t 0.05 -x 2 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s breadth --log trace-file -t 0.05 -x 2 -n 1
 ```
 
 <WorkspaceButton id="bfs" name="BFS on Arena 2" />
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s depth --log trace-file -t 0.05 -x 2 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s depth --log trace-file -t 0.05 -x 2 -n 1
 ```
 
 <WorkspaceButton id="dfs" name="DFS on Arena 2" />
@@ -167,7 +167,7 @@ You should observe distinct differences in the functioning of these two search t
 Run the following command to generate an A\* search trace and try out different visualisation features:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-file -x 100 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace-file -x 100 -n 1
 ```
 
 <WorkspaceButton id="astar" name="A* on Arena 2" />
@@ -180,7 +180,7 @@ Explore the following:
 You can also experiment with different visualisations by modifying the search trace preamble. Here’s an example using the A\* algorithm on an 8-tile puzzle:
 
 ```bash
-python3 piglet.py -p ./example/example_8_puzzle.scen -f tree -s a-star --log trace-file -x 1 -n 1
+python piglet.py -p ./example/example_8_puzzle.scen -f tree -s a-star --log trace-file -x 1 -n 1
 ```
 
 <video width="100%" controls>
@@ -194,7 +194,7 @@ python3 piglet.py -p ./example/example_8_puzzle.scen -f tree -s a-star --log tra
 See how A\* search compares with A\* search that uses a weighted heuristic. Run the following command, replacing `WEIGHT` with values such as 0, 0.5, 1.0, and 8.0:
 
 ```bash
-python3 piglet.py -p ./example/arena2.map.scen -f graph -s a-star --heuristic-weight WEIGHT --log trace-file -x 50 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --heuristic-weight WEIGHT --log trace-file -x 50 -n 1
 ```
 
 <WorkspaceButton id="astar-half-h" name="A* 50% Heuristic Weight on Arena 2" />
