@@ -15,6 +15,7 @@ tags:
 ---
 
 import WorkspaceButton from "@components/WorkspaceButton.astro";
+import Grid from "@components/Grid.astro";
 
 Hey FIT5222 students,
 
@@ -28,8 +29,6 @@ Get Piglet with Posthoc visualisation support by cloning or pulling the latest v
 
 Posthoc is a powerful tool designed for the post-hoc analysis of search algorithms. It allows users to import YAML search trace files and visualise the search process in detail. These search trace files are comprehensive descriptions that include both the process of the search and how to visualise it.
 
-![banner](../projects/image/posthoc/posthoc-wide-old.png)
-
 You can learn more about Posthoc on our [official website](https://posthoc.pathfinding.ai).
 
 Posthoc is particularly useful when you want to visualise how your solver operates. For instance, if you are using Piglet as your solver, as long as Piglet can output YAML search traces, Posthoc can visualise it.
@@ -39,6 +38,7 @@ To recap, search traces represent your search process. A typical search trace fi
 ```yaml
 version: 1.4.0
 views:
+  # Rendering instructions
   main:
     - $: rect
       alpha: 1
@@ -47,11 +47,8 @@ views:
       width: 1
       x: ${{ $.x }}
       y: ${{ $.y }}
-pivot:
-  scale: 1
-  x: ${{ $.x + 0.5 }}
-  y: ${{ $.y + 0.5 }}
 events:
+  # One or more events
   - {
       depth: 0,
       f: 147.05441,
@@ -63,18 +60,17 @@ events:
       x: 277,
       y: 186,
     }
-  - {
-      depth: 0,
-      f: 0.0,
-      g: 0,
-      h: 0.0,
-      id: DHQPrdsI,
-      pId: null,
-      type: destination,
-      x: 273,
-      y: 39,
-    }
 ```
+
+You can render a search tree by including `id` and `pId` properties in your events. You can also specify custom views by including a `views` section in your search trace.
+
+<Grid class="my-4 gap-4" width={400}>
+  
+  ![Search tree](./image/search-tree.png) 
+  
+  ![Search tree](./image/grid-visualisation.png)
+
+</Grid>
 
 Check out the [search trace documentation](https://posthoc.pathfinding.ai/docs/search-trace) for more information.
 
