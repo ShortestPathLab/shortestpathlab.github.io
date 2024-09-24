@@ -1,7 +1,7 @@
 ---
 author: current/kzheng
-pubDatetime: 2024-08-30T06:14:12Z
-modDatetime: 2024-08-30T06:14:12Z
+pubDatetime: 2024-09-24T19:12:38Z
+modDatetime: 2024-09-24T19:12:38Z
 title: Using Posthoc with Piglet
 slug: using-posthoc-with-piglet
 featured: true
@@ -19,17 +19,35 @@ import Grid from "@components/Grid.astro";
 
 Hey FIT5222 students,
 
-We just released Posthoc integration with Piglet, the pathfinding solver in Python. Leverage the power of visualisation to debug and understand the code you write in Piglet.
+A few weeks ago, we demoed Posthoc, the pathfinding search visualiser. We're happy to share that we're releasing Posthoc integration for Piglet. This integration should help you analyse and understand Piglet, and pathfinding search, more effectively. Though not limited to these, Piglet integration out-of-the-box includes several visualisations such as tree, grid, graph, and nine-tile. Here's how to use Posthoc with Piglet to enhance your pathfinding analysis.
 
-## Getting Piglet
+Consider this a beta release. If you have any questions or encounter any problems, [ask in our Discord](https://discord.com/invite/BHuPspePDK) or [raise an issue](https://github.com/ShortestPathLab/posthoc-app/issues).
 
-Get Piglet with Posthoc visualisation support by cloning or pulling the latest version of Piglet from [this repository](https://bitbucket.org/fit5222/piglet-public/src/single-agent-prac/).
+## Updating Piglet
 
-## Introduction to Posthoc
+Get Piglet with Posthoc visualisation support by pulling the latest version of Piglet from [this repository](https://bitbucket.org/fit5222/piglet-public/src/single-agent-prac/). From your Piglet root directory, run the following:
 
-Posthoc is a powerful tool designed for the post-hoc analysis of search algorithms. It allows users to import YAML search trace files and visualise the search process in detail. These search trace files are comprehensive descriptions that include both the process of the search and how to visualise it.
+```bash
+git pull
+```
 
-You can learn more about Posthoc on our [official website](https://posthoc.pathfinding.ai).
+## TL;DR
+
+Run this:
+
+```bash
+python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace tldr.trace.yaml -x 30 -n 1
+```
+
+Get this:
+
+![Example result](./image/tldr.png)
+
+<WorkspaceButton id="tldr" name="A* on Arena 2" />
+
+## Posthoc
+
+[Posthoc](https://posthoc.pathfinding.ai) is a powerful tool to conduct post-hoc analysis of search algorithms. It allows you to import YAML search trace files and visualise the search process in detail. These search trace files are comprehensive descriptions that include both the process of the search and how to visualise it.
 
 Posthoc is particularly useful when you want to visualise how your solver operates. For instance, if you are using Piglet as your solver, as long as Piglet can output YAML search traces, Posthoc can visualise it.
 
@@ -49,17 +67,16 @@ views:
       y: ${{ $.y }}
 events:
   # One or more events
-  - {
-      depth: 0,
-      f: 147.05441,
-      g: 0,
-      h: 147.05441,
-      id: DHQPrdoA,
-      pId: null,
-      type: source,
-      x: 277,
-      y: 186,
-    }
+  - id: DHQPrdoA
+    pId: null
+    type: source
+    # Search progress
+    f: 147.05441
+    g: 0
+    h: 147.05441
+    # Visualisation parameters
+    x: 277
+    y: 186
 ```
 
 You can render a search tree by including `id` and `pId` properties in your events. You can also specify custom views by including a `views` section in your search trace.
@@ -72,7 +89,7 @@ You can render a search tree by including `id` and `pId` properties in your even
 
 </Grid>
 
-Check out the [search trace documentation](https://posthoc.pathfinding.ai/docs/search-trace) for more information.
+Posthoc isn't limited to the out-of-the-box visualisations in Piglet. Check out these [Posthoc demos](https://posthoc.pathfinding.ai) or the [search trace documentation](https://posthoc.pathfinding.ai/docs/search-trace) for more.
 
 ### Generating Search Traces in Piglet
 
@@ -80,7 +97,7 @@ _The following are new features in Piglet.
 Before proceeding, make sure you clone or pull the latest version of Piglet from
 [this repository](https://bitbucket.org/fit5222/piglet-public/src/single-agent-prac/)._
 
-Piglet provides built-in support for outputting search traces, and the process is flexible based on your needs. To generate these traces, you can use the `--log trace` argument in the command line. This argument will print the search trace directly to the console:
+Piglet provides built-in support for outputting search traces. To generate these traces, you can use the `--log trace` argument in the command line. This argument will print the search trace directly to the console:
 
 ```bash
 python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --log trace -x 30 -n 1
@@ -133,13 +150,13 @@ These exercises will help you understand how to use Posthoc with Piglet in diffe
 Generate search traces for breadth-first search and depth-first search using the arena2 map. Use the following commands:
 
 ```bash
-python piglet.py -p ./example/arena2.map.scen -f graph -s breadth --log trace-file -t 0.05 -x 2 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s breadth --log bfs.trace.yaml -t 0.05 -x 2 -n 1
 ```
 
 <WorkspaceButton id="bfs" name="BFS on Arena 2" />
 
 ```bash
-python piglet.py -p ./example/arena2.map.scen -f graph -s depth --log trace-file -t 0.05 -x 2 -n 1
+python piglet.py -p ./example/arena2.map.scen -f graph -s depth --log dfs.trace.yaml -t 0.05 -x 2 -n 1
 ```
 
 <WorkspaceButton id="dfs" name="DFS on Arena 2" />
@@ -193,13 +210,19 @@ See how A\* search compares with A\* search that uses a weighted heuristic. Run 
 python piglet.py -p ./example/arena2.map.scen -f graph -s a-star --heuristic-weight WEIGHT --log trace-file -x 50 -n 1
 ```
 
-<WorkspaceButton id="astar-half-h" name="A* 50% Heuristic Weight on Arena 2" />
-
 Experiment with the following:
 
 - Play back the search and observe the differences in behavior.
 - Use the graph's property tracking mode to monitor the `h`, `f`, and `g` values.
 - Recall that for node `n`, `f(n) = g(n) + h(n)`. Pay attention to how these values change over time and how they influence the search’s behavior.
+
+<Grid class="gap-2">
+
+<WorkspaceButton id="astar-zero-h" name="A* 0% Heuristic Weight on Arena 2" />
+
+<WorkspaceButton id="astar-half-h" name="A* 50% Heuristic Weight on Arena 2" />
+
+</Grid>
 
 ## Additional Resources
 

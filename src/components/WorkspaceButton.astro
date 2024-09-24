@@ -1,4 +1,5 @@
 ---
+const IMAGE_URL = "https://posthoc.pathfinding.ai/img/logo192.png";
 const BASE_URL = (id: string) =>
   import.meta.env.PROD
     ? `https://pathfinding.ai/assets/demos/${id}.workspace`
@@ -12,9 +13,9 @@ const { id, name } = Astro.props;
 <a
   href={`https://posthoc-app.pathfinding.ai?workspace=${encodeURIComponent(BASE_URL(id))}`}
   target="_blank"
-  class="not-prose flex max-w-max flex-row items-center gap-2 truncate rounded-md bg-skin-inverted px-4 py-2"
+  class="not-prose flex max-w-max flex-row items-center gap-2 truncate rounded-md bg-skin-inverted px-4 py-2 pl-3"
 >
-  <span class="material-symbols-outlined text-skin-inverted">workspaces</span>
+  <img src={IMAGE_URL} class="h-6 w-6" />
   <span class="text-skin-inverted">Open in Posthoc</span>
   <span class="truncate text-skin-inverted text-opacity-70">{name}</span>
 </a>
