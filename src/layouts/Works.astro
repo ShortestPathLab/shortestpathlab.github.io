@@ -20,7 +20,7 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
 <Layout title={`Projects - ${SITE.title}`}>
   <Header activeNav="projects" />
   <Main pageTitle="Projects" pageDesc="All projects at ShortestPathLab.">
-    <ul class="grid-flow-row-sparse collection my-8 grid gap-2">
+    <ul class="grid-flow-row-sparse collection my-8 grid gap-4">
       {paginatedPosts.map(work => <WorkCard work={work} />)}
     </ul>
   </Main>

@@ -1,4 +1,5 @@
 ---
+import { slugifyStr } from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -10,16 +11,24 @@ const { member, id } = Astro.props;
 
 const externalAvatar = (t: string = "default") =>
   `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${t}&backgroundColor=efefef`;
+
+const url = id ? `/team/${slugifyStr(member?.title ?? "")}` : member?.url;
 ---
 
-<a href={id ? `/team#${id}` : member?.url} id={id}>
+<a
+  href={url}
+  id={id}
+  class={url ? "hover:text-skin-accent" : "pointer-events-none"}
+>
   <li class="list-none">
     <div
       class=`mb-4 h-12 min-h-12 w-12 min-w-12 rounded-full border-0 bg-cover bg-center`
       style={`background-image: url('${member?.image ?? externalAvatar(member?.title)}')`}
     >
     </div>
-    <h3 class="text-lg">{member?.title}</h3>
+    <h3 class="text-lg">
+      {member?.title}
+    </h3>
     <p class="text-sm">{member?.qualification}</p>
     <p class="text-sm">{member?.role}</p>
     <p class="text-sm">{member?.affiliation}</p>

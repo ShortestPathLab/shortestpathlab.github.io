@@ -4,6 +4,8 @@ import SearchResultList from "./SearchResultList";
 import { pick } from "lodash-es";
 
 export type SearchItem = {
+  author?: string;
+  authors?: string[];
   type: string;
   title: string;
   description?: string;

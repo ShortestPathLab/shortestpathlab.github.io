@@ -19,6 +19,7 @@ export async function getSearchList() {
   const searchList: SearchItem[] = [
     ...posts.map(({ data, slug }) => ({
       ...pick(data, [
+        "author",
         "title",
         "description",
         "tags",
@@ -29,7 +30,7 @@ export async function getSearchList() {
       url: `/news/${slug}`,
     })),
     ...projects.map(({ data, slug }) => ({
-      ...pick(data, ["title", "description", "tags"]),
+      ...pick(data, ["authors", "title", "description", "tags"]),
       type: "Projects",
       url: `/projects/${slug}`,
     })),
@@ -39,15 +40,15 @@ export async function getSearchList() {
         title: `${paper.year} / ${paper.title}`,
         tags: paper.tags,
         verbatim: paper.formatted,
-        url: `/publications/${getPageNumberByPost(paper, { posts: papers })}#${slugifyStr(paper.title ?? "")}`,
+        url: `/publications/${getPageNumberByPost(paper, { posts: papers })}/#${slugifyStr(paper.title ?? "")}`,
         year: paper.year ?? 0,
         slug: paper.title,
       }))
       .toSorted((a, b) => b.year - a.year),
-    ...people.map(({ data, id }) => ({
+    ...people.map(({ data }) => ({
       ...pick(data, ["title", "tags"]),
       type: "People",
-      url: `/team#${id}`,
+      url: `/team/${slugifyStr(data.title)}`,
       description: [data.role, data.qualification, data.affiliation]
         .filter(identity)
         .join(", "),

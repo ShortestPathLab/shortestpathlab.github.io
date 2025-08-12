@@ -1,0 +1,74 @@
+---
+import ArticleHeader from "@components/ArticleHeader.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import { getSearchList } from "@utils/getSearchList";
+import { slugifyStr } from "@utils/slugify";
+import { head } from "lodash-es";
+import { getCollection, getDataEntryById } from "astro:content";
+import SearchResultList from "@components/SearchResultList";
+
+export async function getStaticPaths() {
+  const team = await getCollection("team");
+  return team.map(({ id, data }) => ({
+    params: { id: slugifyStr(data.title) },
+    props: { id },
+  }));
+}
+
+const { id } = Astro.props;
+
+const { data } = await getDataEntryById("team", id);
+
+const searchList = await getSearchList();
+
+function referenceContainsMember(verbatim: string = "") {
+  const names = data.title.split(" ");
+  const lastName = names.pop();
+  const citation = `${lastName}, ${names.map(c => `${head(c)}.`)}`;
+  return verbatim.includes(citation);
+}
+
+const filtered = searchList.filter(
+  ({ verbatim, author, authors }) =>
+    author === id ||
+    authors?.includes?.(id) ||
+    referenceContainsMember(verbatim)
+);
+---
+
+<Layout title=`${data.title} - ${SITE.title}`>
+  <Header />
+  <div class="w-full bg-skin-fill">
+    <div class="mb-8"><Breadcrumbs /></div>
+    <main id="main-content">
+      {
+        !!data.image && (
+          <div
+            class="mb-8 h-16 min-h-16 w-16 min-w-16 rounded-full border-0 bg-cover bg-center"
+            style={`background-image: url('${data?.image}')`}
+          />
+        )
+      }
+      <ArticleHeader
+        title={data.title}
+        tags={data.tags}
+        description={[data.role, data.qualification, data.affiliation]
+          .filter(c => c)
+          .join(", ")}
+        url={data.url}
+      />
+      <SearchResultList list={filtered.map(c => ({ item: c }))} />
+    </main>
+    <Footer />
+  </div>
+
+  <style>
+    main {
+      @apply mx-auto w-full max-w-5xl px-4 pb-12;
+    }
+  </style>
+</Layout>

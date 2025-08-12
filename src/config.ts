@@ -25,9 +25,13 @@ export const LOGO_IMAGE = {
 
 export const SOCIALS: SocialObjects = [
   {
-    name: "Github",
+    name: "youtube",
+    href: "https://www.youtube.com/@ShortestPathLab",
+    linkTitle: ` ${SITE.title} on Youtube`,
+  },
+  {
+    name: "github",
     href: "https://github.com/shortestpathlab",
     linkTitle: ` ${SITE.title} on Github`,
-    active: true,
   },
 ];
