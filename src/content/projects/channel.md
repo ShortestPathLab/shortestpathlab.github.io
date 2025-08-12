@@ -1,6 +1,7 @@
 ---
 title: ShortestPathLab on Youtube
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-url: https://posthoc.pathfinding.ai
-dark: false
+description: Watch demos, showcases, and presentations from the ShortestPathLab cohort
+url: https://www.youtube.com/@ShortestPathLab
+tags: [youtube, channel]
+image: /assets/previews//channel.png
 ---

@@ -6,10 +6,14 @@ import { head } from "lodash-es";
 
 export interface Props {
   id: CollectionEntry<"team">["id"];
+  member?: CollectionEntry<"team">["data"];
 }
 
 const { id } = Astro.props;
 const member = head(await getCollection("team", c => c.id === id));
 ---
 
-<MemberCard member={member?.data} />
+<MemberCard
+  member={member?.data || member ? { ...member?.data, ...member } : undefined}
+  id={id}
+/>

@@ -1,4 +1,5 @@
 ---
+import { slugifyStr } from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -8,7 +9,10 @@ const { work } = Astro.props;
 const dark = work?.data?.dark;
 ---
 
-<a href=`/projects/${work?.slug}` transition:name={work?.slug}>
+<a
+  href=`/projects/${work?.slug}`
+  transition:name={slugifyStr(work?.data.title ?? "")}
+>
   <li
     class=`flex flex-col gap-2 h-96 min-w-64 rounded-md bg-blend-multiply p-6 bg-cover bg-center`
     style=`background-image: linear-gradient(to bottom, rgba(${dark ? "0 0 0" : "225 225 225"} / 60%), rgba(${dark ? "0 0 0" : "225 225 225"} / 20%), rgba(${dark ? "0 0 0" : "225 225 225"} / 10%)), url('${work?.data?.image??'/assets/white.png'}')`

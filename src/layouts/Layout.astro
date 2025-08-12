@@ -36,7 +36,7 @@ const socialImageURL = new URL(
 <!doctype html>
 <html
   lang=`${LOCALE.lang ?? "en"}`
-  class={`${scrollSmooth && "scroll-smooth"}`}
+  class={`${scrollSmooth && "scroll-smooth"} overflow-x-hidden`}
 >
   <head>
     <meta charset="UTF-8" />
@@ -119,7 +119,7 @@ const socialImageURL = new URL(
       }).observe(document.documentElement);
     </script>
   </head>
-  <body>
+  <body class="bg-black">
     <slot />
   </body>
 </html>

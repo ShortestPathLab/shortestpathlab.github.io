@@ -1,0 +1,75 @@
+---
+import { slugifyStr } from "@utils/slugify";
+import Datetime from "./Datetime";
+import Hr from "./Hr.astro";
+import Member from "./Member.astro";
+import Tag from "./Tag";
+
+export interface Props {
+  title?: string;
+  pubDatetime?: string | Date | null;
+  modDatetime?: string | Date | null;
+  author?: string;
+  tags?: string[];
+  description?: string;
+  url?: string;
+}
+
+const {
+  title = "",
+  description,
+  pubDatetime,
+  modDatetime,
+  author,
+  url,
+  tags = [],
+} = Astro.props;
+---
+
+<h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
+{
+  !!pubDatetime && (
+    <Datetime
+      pubDatetime={pubDatetime}
+      modDatetime={modDatetime}
+      size="lg"
+      className="my-4"
+    />
+  )
+}
+{
+  !!author && (
+    <div class="my-8">
+      <Member id={author as any} />
+    </div>
+  )
+}
+{!!description && <p class="post-description">{description}</p>}
+{
+  !!url && (
+    <p class="post-link">
+      <a href={url}>{url}</a>
+    </p>
+  )
+}
+<Hr noPadding />
+{
+  !!tags.length && (
+    <ul class="my-8">
+      {tags.map(tag => (
+        <Tag tag={slugifyStr(tag)} />
+      ))}
+    </ul>
+  )
+}
+<style>
+  .post-title {
+    @apply mt-4 text-2xl sm:text-4xl;
+  }
+  .post-description {
+    @apply mt-4 max-w-xl font-medium;
+  }
+  .post-link {
+    @apply my-8 font-medium text-skin-accent;
+  }
+</style>

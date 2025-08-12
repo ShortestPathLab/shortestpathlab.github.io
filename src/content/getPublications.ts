@@ -1,4 +1,4 @@
-import { chain, entries, once, parseInt, values } from "lodash-es";
+import { chain, once, startsWith, trim, values } from "lodash-es";
 ///@ts-ignore
 import { Cite, plugins } from "@citation-js/core";
 import "@citation-js/plugin-bibtex";
@@ -20,6 +20,7 @@ export type Publication = {
   bibtex?: string;
   pdf?: string;
   citation?: string;
+  tags: string[];
 };
 
 const YEAR = 0;
@@ -46,11 +47,22 @@ export const getPublications = once(async () => {
           lang: "en-us",
         }),
         url: c.DOI ? `https://doi.org/${c.DOI}` : c.URL,
-        pdf: c.pdf,
+        pdf: c.pdf
+          ? startsWith(c.pdf, "http")
+            ? c.pdf
+            : `/pdf/${c.pdf}`
+          : undefined,
         title: c.title,
         year: c.issued["date-parts"][0][YEAR] || 0,
         month: c.issued["date-parts"][0][MONTH] || 0,
         date: c.issued["date-parts"][0][DATE] || 0,
+        tags: c.annote
+          ? chain(c.annote)
+              .split(",")
+              .map(trim)
+              .map(v => chain(v).kebabCase().replace("-", "").value())
+              .value()
+          : ["untagged"],
       })
     )
     .orderBy(["year", "title", "type"], ["desc", "asc", "asc"])
