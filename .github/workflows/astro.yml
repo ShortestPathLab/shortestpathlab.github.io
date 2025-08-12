@@ -41,6 +41,8 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Install
+        run: bun i
       - name: Build with Astro
         run: >
           bunx --bun astro build
