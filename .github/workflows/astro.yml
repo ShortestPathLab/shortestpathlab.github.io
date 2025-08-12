@@ -44,11 +44,7 @@ jobs:
       - name: Install
         run: bun i
       - name: Build with Astro
-        run: >
-          bunx --bun astro build
-            --site "${{ steps.pages.outputs.origin }}"
-            --base "${{ steps.pages.outputs.base_path }}";
-          bunx --bun jampack ./dist
+        run: bunx --bun astro build --site "${{ steps.pages.outputs.origin }}" --base "${{ steps.pages.outputs.base_path }}"; bunx --bun jampack ./dist
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
