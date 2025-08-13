@@ -2,15 +2,16 @@
 title: Multi-Agent Pathfinding with TurtleBot 4
 description: Placeholder description for the MAPF with TurtleBot 4 project.
 url: https://github.com/ShortestPathLab
-image: /assets/previews/robot.png
+image: /assets/previews/ros.png
 featured: true
+tags: [mapf, turtlebot, summerresearch]
 dark: false
 ---
 
 import Grid from "@components/Grid.astro";
 import Member from "@components/Member.astro";
 
-![banner](/assets/previews/robot-wide.png)
+![banner](/assets/previews/ros.png)
 
 ## Contributors
 
@@ -23,8 +24,17 @@ import Member from "@components/Member.astro";
 
 ## Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit lectus sem, vitae pretium mauris iaculis a. Sed dapibus imperdiet turpis in condimentum. Quisque dui metus, dapibus quis turpis vel, ultrices placerat dolor. Duis quis lacus vulputate, ultrices justo a, faucibus metus. Vivamus ac tortor nec turpis blandit molestie. Phasellus nec nibh non augue imperdiet placerat quis vitae metus. Vestibulum blandit consequat sapien, sit amet vulputate urna sollicitudin et. Duis gravida neque at hendrerit laoreet. Sed facilisis lectus nec nulla mattis facilisis. Mauris sollicitudin, velit vitae vulputate ultrices, mi nunc sagittis dolor, id vestibulum lacus justo vel risus. Sed vitae blandit ipsum, sed eleifend arcu. Curabitur ornare metus non justo porttitor accumsan eget nec enim. Curabitur interdum enim quis tincidunt tincidunt. Vivamus pharetra viverra viverra.
+Multi-Agent Path Finding (MAPF) focuses on computing collision-free paths for a group of agents. Traditionally, MAPF research has been largely theoretical, often relying on unrealistic assumptions—such as agents operating in a simplified grid world with perfect sensing, communication, and execution. Benchmark datasets and performance evaluations have almost exclusively been conducted under these idealised conditions, overlooking the many complexities of real robot operation, including localisation errors, actuation delays, communication latency, and imperfect motion control. As a result, there is often a significant gap between the throughput reported by MAPF solvers in simulation and the actual throughput achievable with physical robots.
 
-Mauris vehicula libero eu elit sagittis scelerisque. Duis erat risus, hendrerit tristique sem ac, gravida varius turpis. Nunc rutrum tincidunt diam, id elementum neque ultrices eget. Vestibulum luctus ipsum vel interdum suscipit. Integer tempus lectus suscipit tincidunt sagittis. Nam suscipit elit eros, sit amet gravida ex porta vitae. Maecenas malesuada venenatis tortor sed imperdiet. Suspendisse ex lectus, euismod vitae dignissim at, commodo vitae dolor. Nulla laoreet lorem ex, id vehicula nisl sodales eget. Suspendisse in commodo erat. Phasellus efficitur facilisis sem, non ultrices nunc mattis in. Sed ultrices ex eget risus porta aliquet. Nunc aliquet ultricies nulla, ut commodo mi accumsan nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce fringilla id lacus vitae blandit.
+This project aims to bridge that gap by developing a framework and interface that can translate the discrete actions produced by MAPF planners into executable commands for real robots. Using a fleet of TurtleBots, we conduct experiments to validate MAPF solutions in realistic settings. This not only provides a practical testing environment for MAPF planners but also offers valuable insights into the discrepancies between theoretical performance and real-world execution, helping inform the design of more robust and deployment-ready MAPF algorithms.
 
-Donec eros mi, rutrum in orci eget, convallis varius nibh. Curabitur vestibulum laoreet urna id vulputate. Vestibulum tempor, orci nec interdum facilisis, neque metus placerat tellus, sit amet varius felis risus sit amet erat. Morbi auctor, sem sit amet auctor feugiat, sapien neque ultrices nibh, eu dapibus nibh mauris id turpis. Vivamus sit amet risus vel tortor dictum rhoncus convallis ac lorem. Cras porttitor luctus varius. Pellentesque ut lacus at odio pretium aliquet in a nisl. Maecenas bibendum non mi ac semper. Quisque ante est, gravida in eros non, luctus eleifend dolor. Maecenas convallis finibus quam eu porta.
+### Summer research 2025
+
+We're looking for students to take part in Monash summer vacation research scholarships 2025.
+You'll spend twelve weeks working with the team to develop systems for real-world multi-agent robotics.
+
+- Applications open: Monday 5 August 2025 (12AM AEST)
+- Applications close: Friday 29 August 2025 (5PM AEST)
+- Notice of outcome: Mid to late October
+
+If you're interested, [apply here](https://www.monash.edu/study/fees-scholarships/scholarships/summer-winter/view?area=1-Faculty%20of%20Information%20Technology#:~:text=3810).
