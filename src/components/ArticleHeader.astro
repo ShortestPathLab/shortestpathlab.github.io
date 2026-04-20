@@ -13,6 +13,7 @@ export interface Props {
   tags?: string[];
   description?: string;
   url?: string;
+  email?: string;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   modDatetime,
   author,
   url,
+  email,
   tags = [],
 } = Astro.props;
 ---
@@ -45,13 +47,16 @@ const {
   )
 }
 {!!description && <p class="post-description">{description}</p>}
+
 {
-  !!url && (
+  (!!email || !!url) && (
     <p class="post-link">
-      <a href={url}>{url}</a>
+      {!!url && <a href={url}>{url}</a>}
+      {!!email && <a href={`mailto:${email}`}>{email}</a>}
     </p>
   )
 }
+
 <div class="mt-8">
   <Hr noPadding />
 </div>
@@ -72,6 +77,6 @@ const {
     @apply mt-2 max-w-xl font-medium;
   }
   .post-link {
-    @apply mt-8 font-medium text-skin-accent;
+    @apply mt-8 flex flex-col gap-2 font-medium text-skin-accent;
   }
 </style>

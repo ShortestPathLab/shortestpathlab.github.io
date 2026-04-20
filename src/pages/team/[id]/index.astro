@@ -60,6 +60,7 @@ const filtered = searchList.filter(
           .filter(c => c)
           .join(", ")}
         url={data.url}
+        email={data.email}
       />
       <SearchResultList list={filtered.map(c => ({ item: c }))} />
     </main>

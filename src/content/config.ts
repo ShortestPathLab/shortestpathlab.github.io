@@ -55,6 +55,7 @@ const team = defineCollection({
       url: z.string().optional(),
       image: z.string().optional(),
       tags: z.array(z.string()).default(["untagged"]),
+      email: z.string().email().optional(),
     }),
 });
 
