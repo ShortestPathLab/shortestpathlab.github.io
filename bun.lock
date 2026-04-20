@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "shortestpathlab.github.io",
@@ -8,7 +9,7 @@
         "@astrojs/mdx": "4.3.3",
         "@astrojs/rss": "4.0.12",
         "@citation-js/core": "^0.7.14",
-        "@citation-js/plugin-bibtex": "https://gitpkg.vercel.app/ShortestPathLab/citation-js/packages/plugin-bibtex?main",
+        "@citation-js/plugin-bibtex": "https://github.com/ShortestPathLab/citation-js-plugin-bibtex",
         "@citation-js/plugin-csl": "^0.7.14",
         "@resvg/resvg-js": "^2.6.0",
         "@types/downloadjs": "^1.4.6",
@@ -134,7 +135,7 @@
 
     "@citation-js/name": ["@citation-js/name@0.4.2", "", {}, "sha512-brSPsjs2fOVzSnARLKu0qncn6suWjHVQtrqSUrnqyaRH95r/Ad4wPF5EsoWr+Dx8HzkCGb/ogmoAzfCsqlTwTQ=="],
 
-    "@citation-js/plugin-bibtex": ["@citation-js/plugin-bibtex@https://gitpkg.vercel.app/ShortestPathLab/citation-js/packages/plugin-bibtex?main", { "dependencies": { "@citation-js/date": "^0.5.0", "@citation-js/name": "^0.4.2", "moo": "^0.5.1" }, "peerDependencies": { "@citation-js/core": "^0.7.0" } }],
+    "@citation-js/plugin-bibtex": ["@citation-js/plugin-bibtex@github:ShortestPathLab/citation-js-plugin-bibtex#8d78155", { "dependencies": { "@citation-js/date": "^0.5.0", "@citation-js/name": "^0.4.2", "moo": "^0.5.1" }, "peerDependencies": { "@citation-js/core": "^0.7.0" } }, "ShortestPathLab-citation-js-plugin-bibtex-8d78155", "sha512-fbOCZ+erKZiPEMBPgzYrslG/Wb5o2if5sIkWbJ3rs80KjT2bUgPJwiqMb7ce8e2W6+POfeVV7hdhxFuOqhXJgA=="],
 
     "@citation-js/plugin-csl": ["@citation-js/plugin-csl@0.7.14", "", { "dependencies": { "@citation-js/date": "^0.5.0", "citeproc": "^2.4.6" }, "peerDependencies": { "@citation-js/core": "^0.7.0" } }, "sha512-7AKB8lMz1IqdtoE33NnWIpteLYMuSl3xqT+Cax7sQKwAIJEoq2HBmb43Ja8xQQ36nREAupQJv1V6XksIAmYnCg=="],
 
