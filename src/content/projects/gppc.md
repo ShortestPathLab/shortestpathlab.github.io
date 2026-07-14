@@ -4,7 +4,7 @@ description: A forum for tracking and disseminating state-of-the-art progress in
 url: https://gppc.search-conference.org/
 featured: true
 image: /assets/previews/gppc.png
-tags: [singleagent, competition]
+tags: [competition, benchmarks, gridmaps, pathfinding]
 ---
 
 The Grid-Based Path Planning Competition (GPPC²) is a forum for tracking and disseminating state-of-the-art progress in the area. It is the fourth edition of the competition, with previous competitions in 2012, 2013 and 2014.
